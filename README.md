@@ -5,9 +5,11 @@ Here you can download, use, create or contribute
 
 Every shaders are stored in the dedicated folders
 
-You can see the renders in Shader-ball-scene and Shader-simulation-exercise folder
+Shaders are stored in `Shader` folder
 
-Shader-stress-test are usefull if you want to test in some different and heavy light situation. Download Duf files and go testing !
+You can see the renders in `Shader-ball-scene` and `Shader-simulation-exercise` folder
+
+`Shader-stress-test` are usefull if you want to test in some different and heavy light situation. Download Duf files and go testing !
 
 If you don't know how github work look at this beginning article https://guides.github.com/activities/hello-world/ or ask me for help
 
