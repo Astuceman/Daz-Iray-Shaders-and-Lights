@@ -3,6 +3,7 @@ Welcome home Daz users
 
 Here you can download, use, create or contribute
 
+# How that work ?
 Every shaders are stored in the dedicated folders
 
 Shaders are stored in `Shader` folder
