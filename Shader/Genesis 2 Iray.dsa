@@ -495,7 +495,7 @@ DsActions.prototype.setMaterialProperties = function( oMaterial, oShape ){
 	g_oPresetHelper.setColorProperty( "Translucency Color",  [ 255, 150, 131 ] );
 	g_oPresetHelper.setColorProperty( "SSS Reflectance Tint",  [ 255, 255, 255 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Glossy Weight", true, 0, 1, [ 0 ] );
-	g_oPresetHelper.setNumericPropertyWithAttributes( "Glossy Layered Weight", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Glossy Layered Weight", true, 0, 1, [ 0.5 ] );
 	g_oPresetHelper.setNumericProperty( "Share Glossy Inputs",  [ 1 ] );
 	g_oPresetHelper.setColorProperty( "Glossy Color",  [ 255, 255, 255 ] );
 	g_oPresetHelper.setNumericProperty( "Glossy Color Effect",  [ "Scatter & Transmit" ] );
@@ -551,7 +551,7 @@ DsActions.prototype.setMaterialProperties = function( oMaterial, oShape ){
 	g_oPresetHelper.setNumericProperty( "Transmitted Measurement Distance",  [ 2 ] );
 	g_oPresetHelper.setColorProperty( "Transmitted Color",  [ 180, 128, 98 ] );
 	g_oPresetHelper.setNumericProperty( "Scattering Measurement Distance",  [ 0.5 ] );
-	g_oPresetHelper.setNumericProperty( "SSS Amount",  [ 0.3 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "SSS Amount", true, 0, 1, [ 0.3 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "SSS Direction", true, -1, 1, [ -0.5 ] );
 	g_oPresetHelper.setColorProperty( "Emission Color",  [ 0, 0, 0 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Emission Temperature", true, 0, 10000, [ 6000 ] );
