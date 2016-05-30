@@ -16,8 +16,6 @@ If you don't know how github work look at this beginning article https://guides.
 
 **Have fun**  :smiley:
 
-DAZ RULES !!!!
-
 Rules :
 - Don't post what's not yours (duh) but you can post shaders or renders if you have the direct autorisation of the creator and explain what we do here with the direct link to the project (https://github.com/Astuceman/hello-world)
 - English is the default language (duh)</um>
