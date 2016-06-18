@@ -6,10 +6,16 @@ Here you can download, use, create or contribute
 # How that work ?
 Every shaders are stored in the dedicated folders
 
-- `Shader`                      Shaders .dsa files + icon
-- `Shader-ball-scene`           Render of ball scene to see how the shader look
-- `Shader-simulation-exercise`  Example render of one shader in many situation (no rules)
-- `Shader-stress-test`          Test scene to figure out if your shader work in every situations
+- `Shaders`                      Shaders .dsa files + icon
+- `Ball-scene-renders`           Render of ball scene to see how the shader look
+- `Example-renders`  Example render of one shader in many situation (no rules)
+- `Stress-test`          Test scene to figure out if your shader work in every situations
+
+There is three branch for now :
+
+1. **Master** : every one will see it at first and it need to be test and bug free. This is the stable branch
+2. **New Shaders** : When you have created something completly new and want simply to add it after some feedbacks if you ask it
+3. **Update shaders** : Basicaly when you want to polish or update any file. Add modification to something that exist allready
 
 
 If you don't know how github work look at this beginning article https://guides.github.com/activities/hello-world/ or `ask me` for help
