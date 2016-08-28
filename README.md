@@ -6,10 +6,10 @@ Here you can download, use, create or contribute
 # How that work ?
 Every shaders are stored in the dedicated folders
 
-- `Shaders`                      Shaders .dsa files + icon
-- `Ball-scene-renders`           Render of ball scene to see how the shader look
-- `Example-renders`  Example render of one shader in many situation (no rules)
-- `Stress-test`          Test scene to figure out if your shader work in every situations
+- `Shaders`               Shaders .dsa files + icon
+- `Ball-scene-renders`    Render of ball scene to see how the shader look
+- `Example-renders`       Example render of one shader in many situation (no rules)
+- `Stress-test`           Test scene to figure out if your shader work in every situations
 
 There is three branch for now :
 
