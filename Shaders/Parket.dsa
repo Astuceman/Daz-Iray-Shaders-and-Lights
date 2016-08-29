@@ -1,0 +1,1050 @@
+// DAZ Studio version 4.9.2.70 filetype Shader Preset
+
+var g_sTOOL_NAME = "Shader Preset";
+var g_sDEFAULT = "Selected";
+var g_oFILE = new DzFile( getScriptFileName() );
+var g_sSCRIPT_NAME = String( "%1.%2" ).arg( g_oFILE.baseName() ).arg( g_oFILE.extension() );
+var g_bSHIFT_PRESSED = shiftPressed();
+var g_bCONTROL_PRESSED = ctrlPressed();
+
+var g_sALL = "All";
+var g_sSELECTED = "Selected";
+var g_sABSOLUTE_MAPS = "Replace";
+var g_sIGNORE_MAPS = "Ignore";
+
+var g_oGui = new DsInterface;
+var g_oActions = new DsActions;
+var g_oStringHelper = new DzStringHelper;
+var g_oArrayHelper = new DzArrayHelper;
+var g_oPresetHelper = new DzPresetHelper;
+var g_oSettingsHelper = new DzSettingsHelper;
+var g_oSceneHelper = new DzSceneHelper;
+
+/***********************************************************************
+***** DsInterface Prototype *****
+***********************************************************************/
+
+/*********************************************************************/
+function DsInterface()
+{
+	this.m_nMARGIN = 5;
+	this.m_nSPACING = 5;
+	this.m_nMIN_BTN_WIDTH = 80;
+	this.m_nMAX_BTN_HEIGHT = 20;
+	this.m_nWIDGET_WIDTH = 190;
+	this.m_aBoolNames = new Array;
+	this.m_aBoolObjs = new Array;
+	this.m_aStrNames = new Array;
+	this.m_aStrObjs = new Array;
+	this.m_aCmbNames = new Array;
+	this.m_aCmbObjs = new Array;
+	this.m_wDlg, this.m_wTabStack;
+	this.m_wOptionPage, this.m_wPrefsPage;
+	this.m_wCombGB, this.m_wPrefsGB;
+	this.m_wSrfcsLbl, this.m_wMpSttngsLbl;
+	this.m_wSurfaces, this.m_wMapSettings;
+	this.m_wHelpBtn, this.m_wAcceptBtn, this.m_wCancelBtn;
+	this.m_wRcrdOnExec, this.m_wRcrdBtn, this.m_wRdBtn, this.m_wDfltBtn;
+
+}
+/***********************************************************************/
+DsInterface.superclass = Object;
+
+/*********************************************************************/
+DsInterface.prototype.doCommon = function()
+{
+	this.m_wDlg = new DzDialog;
+	this.m_wTabStack = new DzTabWidget( this.m_wDlg );
+	this.m_wOptionPage = new DzVGroupBox( this.m_wTabStack );
+	this.m_wCombGB = new DzVGroupBox( this.m_wOptionPage );
+	this.m_wSrfcsLbl = new DzLabel( this.m_wCombGB );
+	this.m_wSurfaces = new DzComboBox( this.m_wCombGB );
+	this.m_wSurfaces.insertItem( g_sALL );
+	this.m_wSurfaces.insertItem( g_sSELECTED );
+	this.m_aCmbObjs.push( this.m_wSurfaces );
+	this.m_aCmbNames.push( "cbSurfaces" );
+	this.m_wMpSttngsLbl = new DzLabel( this.m_wCombGB );
+	this.m_wMapSettings = new DzComboBox( this.m_wCombGB );
+	this.m_wMapSettings.insertItem( g_sABSOLUTE_MAPS );
+	this.m_wMapSettings.insertItem( g_sIGNORE_MAPS );
+	this.m_aCmbObjs.push( this.m_wMapSettings );
+	this.m_aCmbNames.push( "cbMapSettings" );
+	this.m_wPrefsPage = new DzVGroupBox( this.m_wTabStack );
+	this.m_wPrefsGB = new DzVGroupBox( this.m_wPrefsPage );
+	this.m_wRcrdOnExec = new DzCheckBox( this.m_wPrefsGB );
+	this.m_aBoolObjs.push( this.m_wRcrdOnExec );
+	this.m_aBoolNames.push( "rcrdOnExec" );
+	this.setDefaults();
+}
+
+/*********************************************************************/
+DsInterface.prototype.doDialog = function()
+{
+	this.doCommon();
+	var oHelp = App.getHelpMgr();
+	var oMgr = MainWindow.getActionMgr();
+	var oAction = oMgr ? oMgr.findAction( "DzWhatsThisAction" ) : undefined;
+	this.m_wDlg.caption = String( "%1 (%2)" ).arg( g_sTOOL_NAME ).arg( g_sSCRIPT_NAME );
+	this.m_wDlg.whatsThis = String( "<b>File : </b> %1<br>" ).arg( g_sSCRIPT_NAME ) +
+							String( "<b>Type : </b> %2<br>" ).arg( getScriptType() ) +
+							String( "<b>Size : </b> %3<br>" ).arg( g_oFILE.sizeStr() ) +
+							String( "<b>Version : </b> %4<br>" ).arg( getScriptVersionString() ) +
+							String( "<b>Created : </b> %5<br>" ).arg( g_oFILE.created().toString( "dddd, MMMM d yyyy h:mm ap" ) ) +
+							String( "<b>Modified : </b> %6" ).arg( g_oFILE.lastModified().toString( "dddd, MMMM d yyyy h:mm ap" ) );
+	var wDlgLayout = new DzGridLayout( this.m_wDlg );
+	wDlgLayout.margin = this.m_nMARGIN;
+	wDlgLayout.spacing = this.m_nSPACING;
+	wDlgLayout.addMultiCellWidget( this.m_wTabStack, 0, 0, 0, 2 );
+	var wDlgBtnsGB = new DzGroupBox( this.m_wDlg );
+	wDlgBtnsGB.flat = true;
+	var wDlgBtnsLyt = new DzGridLayout( wDlgBtnsGB );
+	wDlgBtnsLyt.margin = this.m_nMARGIN;
+	wDlgBtnsLyt.spacing = this.m_nSPACING;
+	this.m_wHelpBtn = new DzPushButton( wDlgBtnsGB );
+	this.m_wHelpBtn.pixmap = new Pixmap( String( "%1/images/icons/whatsthissmallicon.png" ).arg( App.getResourcesPath() ) );
+	this.m_wHelpBtn.maxHeight = this.m_nMAX_BTN_HEIGHT;
+	if( oAction )
+	{
+		this.m_wHelpBtn.clicked.connect( oAction, "trigger()" );
+	}
+	this.m_wHelpBtn.toolTip = oHelp.getToolTip( "WhatsThis" );
+	this.m_wHelpBtn.whatsThis = oHelp.getHelpString( "WhatsThis" );
+	wDlgBtnsLyt.addWidget( this.m_wHelpBtn, 0, 0 );
+	wDlgBtnsLyt.setColStretch( 1, 1 );
+	this.m_wAcceptBtn = new DzPushButton( wDlgBtnsGB );
+	this.m_wAcceptBtn.text = "&Accept";
+	this.m_wAcceptBtn.minWidth = this.m_nMIN_BTN_WIDTH;
+	this.m_wAcceptBtn.maxHeight = this.m_nMAX_BTN_HEIGHT;
+	this.m_wDlg.setAcceptButton( this.m_wAcceptBtn );
+	this.m_wAcceptBtn.toolTip = oHelp.getToolTip( "AcceptDialog" );
+	this.m_wAcceptBtn.whatsThis = oHelp.getHelpString( "AcceptDialog" );
+	wDlgBtnsLyt.addWidget( this.m_wAcceptBtn, 0, 2 );
+	this.m_wCancelBtn = new DzPushButton( wDlgBtnsGB );
+	this.m_wCancelBtn.text = "&Cancel";
+	this.m_wCancelBtn.minWidth = this.m_nMIN_BTN_WIDTH;
+	this.m_wCancelBtn.maxHeight = this.m_nMAX_BTN_HEIGHT;
+	this.m_wDlg.setRejectButton( this.m_wCancelBtn );
+	this.m_wCancelBtn.toolTip = oHelp.getToolTip( "CancelDialog" );
+	this.m_wCancelBtn.whatsThis = oHelp.getHelpString( "CancelDialog" );
+	wDlgBtnsLyt.addWidget( this.m_wCancelBtn, 0, 3 );
+	wDlgLayout.addMultiCellWidget( wDlgBtnsGB, 1, 1, 0, 2 );
+	this.m_wOptionPage.whatsThis = oHelp.getHelpString( "PresetOptionTab" );
+	this.m_wOptionPage.flat = true;
+	this.m_wOptionPage.insideMargin = this.m_nMARGIN;
+	this.m_wOptionPage.insideSpacing = this.m_nSPACING;
+	this.m_wCombGB.columns = 2;
+	this.m_wSrfcsLbl.text = "Surfaces :";
+	this.m_wSrfcsLbl.alignment = this.m_wSrfcsLbl.AlignRight;
+	this.m_wSrfcsLbl.whatsThis = oHelp.getHelpString( "PresetSurface" );
+	this.m_wSurfaces.minWidth = this.m_nWIDGET_WIDTH;
+	this.m_wSurfaces.whatsThis = this.m_wSrfcsLbl.whatsThis;
+	this.m_wMpSttngsLbl.text = "Map Settings :";
+	this.m_wMpSttngsLbl.alignment = this.m_wMpSttngsLbl.AlignRight;
+	this.m_wMpSttngsLbl.whatsThis = oHelp.getHelpString( "PresetSurfaceMap" );
+	this.m_wMapSettings.minWidth = this.m_nWIDGET_WIDTH;
+	this.m_wMapSettings.whatsThis = this.m_wMpSttngsLbl.whatsThis;
+	this.m_wTabStack.addTab( this.m_wOptionPage, "Options" );
+	this.m_wPrefsPage.whatsThis = oHelp.getHelpString( "PresetPrefTab" );
+	this.m_wPrefsPage.flat = true;
+	this.m_wPrefsPage.insideMargin = this.m_nMARGIN;
+	this.m_wPrefsPage.insideSpacing = this.m_nSPACING;
+	this.m_wPrefsGB.margin = this.m_nMARGIN;
+	this.m_wPrefsGB.spacing = this.m_nSPACING;
+	this.m_wRcrdOnExec.text = "Set Preferred Options on Accept";
+	this.m_wRcrdOnExec.whatsThis = oHelp.getHelpString( "PresetPrefOnAccept" );
+	this.m_wRcrdBtn = new DzPushButton( this.m_wPrefsGB );
+	this.m_wRcrdBtn.text = "&Set Preferred Options";
+	this.m_wRcrdBtn.whatsThis = oHelp.getHelpString( "PresetSetPref" );
+	this.m_wRcrdBtn.pressed.connect( this, "setOptions" );
+	this.m_wRdBtn = new DzPushButton( this.m_wPrefsGB );
+	this.m_wRdBtn.text = "&Read Preferred Options";
+	this.m_wRdBtn.whatsThis = oHelp.getHelpString( "PresetReadPref" );
+	this.m_wRdBtn.pressed.connect( this, "getOptions" );
+	this.m_wDfltBtn = new DzPushButton( this.m_wPrefsGB );
+	this.m_wDfltBtn.text = "Restore &Default Options";
+	this.m_wDfltBtn.whatsThis = oHelp.getHelpString( "PresetRestoreDef" );
+	this.m_wDfltBtn.pressed.connect( this, "setDefaults" );
+	var wNotesGB = new DzVGroupBox( this.m_wPrefsPage );
+	wNotesGB.title = "Notes :";
+	wNotesGB.margin = this.m_nMARGIN;
+	wNotesGB.spacing = this.m_nSPACING;
+	wNotesGB.minWidth = this.m_nWIDGET_WIDTH + 100;
+	var wKeyLbl = new DzLabel( wNotesGB );
+	wKeyLbl.text = oHelp.getHelpString( "PresetNotes" );
+	this.m_wTabStack.addTab( this.m_wPrefsPage, "Preferences" );
+	this.m_wDlg.maxWidth = this.m_wDlg.minWidth;
+	this.m_wDlg.maxHeight = this.m_wDlg.minHeight;
+	this.getOptions();
+	if( this.m_wDlg.exec() )
+	{
+		if( this.m_wRcrdOnExec.checked )
+		{
+			this.setOptions();
+		}
+		g_oActions.begin();
+	}
+}
+
+/*********************************************************************/
+DsInterface.prototype.doNoDialog = function()
+{
+	this.doCommon();
+	if( g_bSHIFT_PRESSED )
+	{
+		this.getOptions();
+	}
+	g_oActions.begin();
+}
+
+/*********************************************************************/
+DsInterface.prototype.setDefaults = function()
+{
+	for( var i = 0; i < this.m_wSurfaces.count; i++ )
+	{
+		if( this.m_wSurfaces.text( i ) == g_sDEFAULT )
+		{
+			this.m_wSurfaces.currentItem = i;
+			break;
+		}
+		this.m_wSurfaces.currentItem = 0;
+	}
+	for( var i = 0; i < this.m_wMapSettings.count; i++ )
+	{
+		if( this.m_wMapSettings.text( i ) == g_sABSOLUTE_MAPS )
+		{
+			this.m_wMapSettings.currentItem = i;
+			break;
+		}
+		this.m_wMapSettings.currentItem = 0;
+	}
+	this.m_wRcrdOnExec.checked = false;
+}
+
+/*********************************************************************/
+DsInterface.prototype.getOptions = function()
+{
+	for( var i = 0; i < this.m_aBoolObjs.length; i++ )
+	{
+		this.m_aBoolObjs[ i ].checked = g_oSettingsHelper.get( g_oStringHelper.stripSpaces( g_sTOOL_NAME ), this.m_aBoolNames[ i ], this.m_aBoolObjs[ i ].checked );
+	}
+	for( var i = 0; i < this.m_aStrObjs.length; i++ )
+	{
+		this.m_aStrObjs[ i ].text = g_oSettingsHelper.get( g_oStringHelper.stripSpaces( g_sTOOL_NAME ), this.m_aStrNames[ i ], this.m_aStrObjs[ i ].text );
+	}
+	for( var i = 0; i < this.m_aCmbObjs.length; i++ )
+	{
+		var tStr = g_oSettingsHelper.get( g_oStringHelper.stripSpaces( g_sTOOL_NAME ), this.m_aCmbNames[ i ], this.m_aCmbObjs[ i ].currentText );
+		for( var j = 0; j < this.m_aCmbObjs[ i ].count; j++ )
+		{
+			if( this.m_aCmbObjs[ i ].text( j ) == tStr )
+			{
+				this.m_aCmbObjs[ i ].currentItem = j;
+				break;
+			}
+		}
+	}
+}
+
+/*********************************************************************/
+DsInterface.prototype.setOptions = function()
+{
+	for( var i = 0; i < this.m_aBoolObjs.length; i++ )
+	{
+		g_oSettingsHelper.set( g_oStringHelper.stripSpaces( g_sTOOL_NAME ), this.m_aBoolNames[ i ], this.m_aBoolObjs[ i ].checked );
+	}
+	for( var i = 0; i < this.m_aStrObjs.length; i++ )
+	{
+		g_oSettingsHelper.set( g_oStringHelper.stripSpaces( g_sTOOL_NAME ), this.m_aStrNames[ i ], this.m_aStrObjs[ i ].text );
+	}
+	for( var i = 0; i < this.m_aCmbObjs.length; i++ )
+	{
+		g_oSettingsHelper.set( g_oStringHelper.stripSpaces( g_sTOOL_NAME ), this.m_aCmbNames[ i ], this.m_aCmbObjs[ i ].currentText );
+	}
+}
+
+/*********************************************************************/
+DsInterface.prototype.getSurfaces = function()
+{
+	return this.m_wSurfaces.currentText;
+}
+
+/*********************************************************************/
+DsInterface.prototype.getMapSettings = function()
+{
+	return this.m_wMapSettings.currentText;
+}
+
+/***********************************************************************
+***** DsActions Prototype *****
+***********************************************************************/
+
+/*********************************************************************/
+function DsActions()
+{
+	this.m_nSTART_TIME = Scene.getTime();
+	this.m_aNodes = new Array;
+	this.m_aMaterials = new Array;
+	this.m_aNewMaterials = new Array;
+	this.m_aMaterialShapes = new Array;
+	this.m_aMissingClasses = new Array;
+	this.m_sMaterialType;
+	this.m_sMaterialName;
+	this.m_oNode;
+	this.m_oElement;
+	this.m_bAskImage = true;
+	this.m_aImagePaths = new Array;
+
+}
+/***********************************************************************/
+DsActions.superclass = Object;
+
+/*********************************************************************/
+DsActions.prototype.processMaterials = function( oNode, aMaterials, bRecurse )
+{
+	var oObject = oNode.getObject();
+	if( oObject == undefined )
+	{
+		if( oNode.inherits("DzBone") )
+		{
+			var oSkel = oNode.getSkeleton();
+			if( oSkel != undefined && oSkel.inherits("DzLegacyFigure") )
+			{
+				var oAltGeom = oSkel.findAlternateGeometry( oNode );
+				if( oAltGeom != undefined )
+				{
+					oObject = oAltGeom.getObject();
+				}
+			}
+		}
+	}
+
+	if( oObject != undefined )
+	{
+		var nShapes = oObject.getNumShapes();
+		for( var s = 0; s < nShapes; s++ )
+		{
+			var oShape = oObject.getShape( s );
+			if( oShape != undefined )
+			{
+				var nMaterials = oShape.getNumMaterials();
+				for( var m = 0; m < nMaterials; m++ )
+				{
+					var oMaterial = oShape.getMaterial( m );
+					if( g_oArrayHelper.isInArrayByName( aMaterials, oMaterial ) != -1 )
+					{
+						this.buildMaterial( oShape, oMaterial );
+					}
+				}
+			}
+		}
+	}
+	
+	if( bRecurse ){
+		var aStack = [ oNode ];		
+		while( aStack.length > 0 ){
+			var oParent = aStack.pop();			
+			var nNodes = oParent.getNumNodeChildren();
+			var oChild;
+			for( var n = 0; n < nNodes; n++ ){
+				oChild = oParent.getNodeChild( n );
+				if( oChild.inherits( "DzBone" ) ){
+					if( oChild.getNumNodeChildren() > 0 ){
+						aStack.push( oChild );
+					}					
+					this.processMaterials( oChild, aMaterials, false );
+				}
+			}
+		}
+	}
+}
+
+/*********************************************************************/
+DsActions.prototype.prepareMaterial = function()
+{
+	var bBuildMaterial = false;
+	if( this.m_oElement.getMaterialName() != this.m_sMaterialName )
+	{
+		bBuildMaterial = true;
+	}
+	else if( this.m_sMaterialType != this.m_oElement.className())
+	{
+		bBuildMaterial = true;
+	}
+	
+	if( bBuildMaterial )
+		this.processMaterials( this.m_oNode, [ this.m_oElement ], true );
+}
+	
+/*********************************************************************/
+DsActions.prototype.buildMaterial = function( oShape, oMaterial )
+{
+	var bSwap = false;
+	var oNewMaterial;
+	var nIndex = g_oArrayHelper.isInArrayByName( this.m_aNewMaterials, oMaterial );
+	if( nIndex < 0 )
+	{
+		switch( this.m_sMaterialName )
+		{
+			case "Material":
+			{
+				try{
+					oNewMaterial = new DzBrickMaterial;
+					var oMatSettings = new DzSettings;
+					oMatSettings.setStringValue( "AttributesMode", "Scripting" );
+					oMatSettings_sub = oMatSettings.setSettingsValue( "BrickSetup" );
+					oMatSettings_sub_sub = oMatSettings_sub.setSettingsValue( "Bricks" );
+					oMatSettings_sub_sub_sub = oMatSettings_sub_sub.setSettingsValue( "Brick_1" );
+					oMatSettings_sub_sub_sub.setStringValue( "DAZStudioClassName", "DzUserParametersBrick" );
+					oMatSettings_sub_sub_sub_sub = oMatSettings_sub_sub_sub.setSettingsValue( "Attributes" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "UserOutputParameters" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "user_out_1" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ArgName", "value_value_arg" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ParamType", "float" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyClass", "DzFloatProperty" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyName", "Value" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "user_out_2" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ArgName", "color_texture" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ParamType", "texture_2d" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyClass", "DzImageProperty" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyName", "color_texture" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "user_out_3" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ArgName", "bump_texture" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ParamType", "texture_2d" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyClass", "DzImageProperty" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyName", "bump_texture" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "user_out_4" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ArgName", "bump_strength" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ParamType", "float" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyClass", "DzFloatProperty" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyName", "bump_strength" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "user_out_5" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ArgName", "coat_reflection_weight" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ParamType", "float" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyClass", "DzFloatProperty" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyName", "coat_reflection_weight" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "user_out_6" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ArgName", "coat_reflection_roughness" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ParamType", "float" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyClass", "DzFloatProperty" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyName", "coat_reflection_roughness" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "user_out_7" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ArgName", "texture_rotate" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ParamType", "float" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyClass", "DzFloatProperty" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyName", "texture_rotate" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "user_out_8" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ArgName", "maple_wood_coated_ior" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ParamType", "float" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyClass", "DzFloatProperty" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyName", "maple_wood_coated_ior" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "user_out_9" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ArgName", "uv_space_index" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "ParamType", "int" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyClass", "DzIntProperty" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "PropertyName", "uv_space_index" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "BrickSettings" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "BrickTitle", "User Parameters (1)" );
+					oMatSettings_sub_sub_sub_sub_sub.setBoolValue( "HideParams", false );
+					oMatSettings_sub_sub_sub_sub_sub.setFloatValue( "PosX", 369 );
+					oMatSettings_sub_sub_sub_sub_sub.setFloatValue( "PosY", 463 );
+					oMatSettings_sub_sub_sub_sub_sub.setBoolValue( "BrickIsRightToLeft", false );
+					oMatSettings_sub_sub_sub_sub_sub.setIntValue( "Width", 200 );
+					oMatSettings_sub_sub_sub_sub_sub.setIntValue( "Height", 380 );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "BrickParams" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 119 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 215 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 241 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_1" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 139 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 227 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 135 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_2" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 204 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 189 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 229 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_3" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 64 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 128 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 69 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_4" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 113 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 2 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 72 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_5" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 190 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 233 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 20 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_6" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 21 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 118 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 35 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_7" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 60 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 119 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 101 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_8" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 77 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 66 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 194 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_9" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 26 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 200 );
+					oMatSettings_sub_sub_sub_sub.setFloatValue( "BrickVersion", 1 );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "BrickProperties" );
+					oMatSettings_sub_sub_sub_sub = oMatSettings_sub_sub_sub.setSettingsValue( "Parameters" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "val1" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Auto Add" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "value_value_arg" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Tokens", "elr_value_value_arg_b1_t0" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Value" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "Prop_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Label", "Value" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Hidden", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Path", "/User Parameters (1)" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "UserProperty", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "CanAnimate", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Locked", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Manipulator", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Favorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "GlobalFavorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Selected", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AutoFollow", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "AutoFollowTarget", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "XYZInterest", "None" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Clamped", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Mapable", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "NeedMap", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultImageGamma", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Min", -1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Max", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Sensitivity", 0.04 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AsPercent", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Value", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultValue", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Name", "Value" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "color_texture" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Tokens", "elr_color_texture_b1_t0" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Color" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "Prop_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Label", "Color" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Hidden", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Path", "/Appearance" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "UserProperty", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "CanAnimate", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Locked", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Manipulator", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Favorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "GlobalFavorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Selected", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AutoFollow", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "AutoFollowTarget", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultImageGamma", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "TextureModifierFlags", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Value", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Name", "color_texture" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "bump_texture" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Tokens", "elr_bump_texture_b1_t0" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Bump" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "Prop_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Label", "Bump" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Hidden", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Path", "/Appearance" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "UserProperty", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "CanAnimate", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Locked", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Manipulator", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Favorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "GlobalFavorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Selected", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AutoFollow", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "AutoFollowTarget", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultImageGamma", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "TextureModifierFlags", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Value", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Name", "bump_texture" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "bump_strength" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Tokens", "elr_bump_strength_b1_t0" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Bump Strength" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "Prop_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Label", "Bump Strength" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Hidden", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Path", "/Appearance" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "UserProperty", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "CanAnimate", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Locked", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Manipulator", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Favorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "GlobalFavorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Selected", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AutoFollow", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "AutoFollowTarget", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "XYZInterest", "None" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Clamped", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Mapable", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "NeedMap", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultImageGamma", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Min", -1000 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Max", 1000 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Sensitivity", 0.01 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AsPercent", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Value", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultValue", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Name", "bump_strength" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "coat_reflection_weight" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Tokens", "elr_coat_reflection_weight_b1_t0" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Coat Reflection Weight " );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "Prop_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Label", "Coat Reflection Weight " );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Hidden", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Path", "/Appearance" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "UserProperty", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "CanAnimate", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Locked", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Manipulator", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Favorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "GlobalFavorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Selected", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AutoFollow", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "AutoFollowTarget", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "XYZInterest", "None" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Clamped", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Mapable", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "NeedMap", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultImageGamma", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Min", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Max", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Sensitivity", 0.01 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AsPercent", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Value", 0.4 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultValue", 0.4 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Name", "coat_reflection_weight" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "coat_reflection_roughness" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Tokens", "elr_coat_reflection_roughness_b1_t0" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Coat Reflection Roughness" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "Prop_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Label", "Coat Reflection Roughness" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Hidden", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Path", "/Appearance" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "UserProperty", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "CanAnimate", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Locked", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Manipulator", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Favorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "GlobalFavorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Selected", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AutoFollow", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "AutoFollowTarget", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "XYZInterest", "None" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Clamped", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Mapable", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "NeedMap", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultImageGamma", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Min", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Max", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Sensitivity", 0.01 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AsPercent", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Value", 0.01 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultValue", 0.01 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Name", "coat_reflection_roughness" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "texture_rotate" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Tokens", "elr_texture_rotate_b1_t0" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Texture Rotate" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "Prop_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Label", "Texture Rotate" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Hidden", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Path", "/Transform" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "UserProperty", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "CanAnimate", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Locked", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Manipulator", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Favorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "GlobalFavorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Selected", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AutoFollow", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "AutoFollowTarget", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "XYZInterest", "None" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Clamped", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Mapable", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "NeedMap", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultImageGamma", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Min", -1000 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Max", 1000 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Sensitivity", 0.01 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AsPercent", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Value", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultValue", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Name", "texture_rotate" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "maple_wood_coated_ior" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Tokens", "elr_maple_wood_coated_ior_b1_t0" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "IOR" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "Prop_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Label", "IOR" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Hidden", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Path", "/Advanced" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "UserProperty", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "CanAnimate", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Locked", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Manipulator", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Favorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "GlobalFavorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Selected", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AutoFollow", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "AutoFollowTarget", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "XYZInterest", "None" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Clamped", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Mapable", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "NeedMap", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultImageGamma", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Min", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Max", 4 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Sensitivity", 0.01 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AsPercent", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "Value", 1.6 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultValue", 1.6 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Name", "maple_wood_coated_ior" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "uv_space_index" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Tokens", "elr_uv_space_index_b1_t0" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "UV Space Index" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "Prop_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Label", "UV Space Index" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Hidden", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Path", "/Advanced" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "UserProperty", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "CanAnimate", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Locked", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Manipulator", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Favorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "GlobalFavorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Selected", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AutoFollow", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "AutoFollowTarget", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "XYZInterest", "None" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Clamped", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Mapable", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "NeedMap", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultImageGamma", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "Min", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "Max", 3 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "Sensitivity", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "Value", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "DefaultValue", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Name", "uv_space_index" );
+					oMatSettings_sub_sub_sub = oMatSettings_sub_sub.setSettingsValue( "Brick_2" );
+					oMatSettings_sub_sub_sub.setStringValue( "DAZStudioClassName", "DzMDLSurfaceBrick" );
+					oMatSettings_sub_sub_sub_sub = oMatSettings_sub_sub_sub.setSettingsValue( "Attributes" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "BrickSettings" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "BrickSet" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Name", "shader_MDL_Surface" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "LastInvalidate", "1472487640" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "BrickTitle", "MDL Surface (2)" );
+					oMatSettings_sub_sub_sub_sub_sub.setBoolValue( "HideParams", false );
+					oMatSettings_sub_sub_sub_sub_sub.setFloatValue( "PosX", 1286 );
+					oMatSettings_sub_sub_sub_sub_sub.setFloatValue( "PosY", 586 );
+					oMatSettings_sub_sub_sub_sub_sub.setBoolValue( "BrickIsRightToLeft", false );
+					oMatSettings_sub_sub_sub_sub_sub.setIntValue( "Width", 200 );
+					oMatSettings_sub_sub_sub_sub_sub.setIntValue( "Height", 135 );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "BrickParams" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_1" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_2" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_3" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub.setFloatValue( "BrickVersion", 1 );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "BrickProperties" );
+					oMatSettings_sub_sub_sub_sub = oMatSettings_sub_sub_sub.setSettingsValue( "Parameters" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "material" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Material" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "color_id" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Tokens", "elr_color_id_b2_t0" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Material ID" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "Prop_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Label", "Material ID" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Hidden", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Path", "/General/Material ID" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "UserProperty", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "CanAnimate", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Locked", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Manipulator", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Favorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "GlobalFavorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Selected", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AutoFollow", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "AutoFollowTarget", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "XYZInterest", "None" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Clamped", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Mapable", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "NeedMap", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultImageGamma", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "Min", -2147483648 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "Max", 2147483647 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "Sensitivity", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Value" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub.setIntValue( "Red", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub.setIntValue( "Green", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub.setIntValue( "Blue", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "DefaultValue" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub.setIntValue( "Red", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub.setIntValue( "Green", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub.setIntValue( "Blue", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Name", "OutlineColorID" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "subd_displacement_level" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Tokens", "elr_subd_displacement_level_b2_t0" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "SubD Displacement Level" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "Prop_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Label", "SubD Displacement Level" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Hidden", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Path", "/Geometry/Displacement" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "UserProperty", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "CanAnimate", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Locked", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Manipulator", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Favorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "GlobalFavorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Selected", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AutoFollow", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "AutoFollowTarget", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "XYZInterest", "None" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Clamped", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Mapable", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "NeedMap", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setFloatValue( "DefaultImageGamma", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "Min", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "Max", 12 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "Sensitivity", 1 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "Value", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setIntValue( "DefaultValue", 0 );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Name", "SubD Displacement Level" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "max_displacement" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Displace Max" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "rootSettings" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Root Settings" );
+					oMatSettings_sub_sub_sub = oMatSettings_sub_sub.setSettingsValue( "Brick_3" );
+					oMatSettings_sub_sub_sub.setStringValue( "DAZStudioClassName", "DzCustomMDLBrick" );
+					oMatSettings_sub_sub_sub_sub = oMatSettings_sub_sub_sub.setSettingsValue( "Attributes" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "BrickSettings" );
+					oMatSettings_sub_sub_sub_sub_sub.setFloatValue( "PosX", 827 );
+					oMatSettings_sub_sub_sub_sub_sub.setFloatValue( "PosY", 480 );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "BrickTitle", "Custom MDL (4)" );
+					oMatSettings_sub_sub_sub_sub_sub.setBoolValue( "HideParams", false );
+					oMatSettings_sub_sub_sub_sub_sub.setBoolValue( "BrickIsRightToLeft", false );
+					oMatSettings_sub_sub_sub_sub_sub.setIntValue( "Width", 200 );
+					oMatSettings_sub_sub_sub_sub_sub.setIntValue( "Height", 346 );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "BrickParams" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_0" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_1" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_2" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_3" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_4" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_5" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_6" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_7" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_8" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_9" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 39 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub.setSettingsValue( "Param_10" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub_sub_sub.setSettingsValue( "ConnectionColor" );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Red", 15 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Green", 176 );
+					oMatSettings_sub_sub_sub_sub_sub_sub_sub_sub.setFloatValue( "Blue", 208 );
+					oMatSettings_sub_sub_sub_sub_sub.setBoolValue( "ShowAdvanced", false );
+					oMatSettings_sub_sub_sub_sub.setFloatValue( "BrickVersion", 1 );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "BrickProperties" );
+					oMatSettings_sub_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub_sub.setSettingsValue( "MDL Callable" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Label", "MDL Callable" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Hidden", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Path", "/General" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "UserProperty", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "CanAnimate", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Locked", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Manipulator", true );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Favorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "GlobalFavorite", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "Selected", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setBoolValue( "AutoFollow", false );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "AutoFollowTarget", "" );
+					oMatSettings_sub_sub_sub_sub_sub_sub.setStringValue( "Value", "state::position()" );
+					oMatSettings_sub_sub_sub_sub = oMatSettings_sub_sub_sub.setSettingsValue( "Parameters" );
+					oMatSettings_sub_sub_sub_sub_sub = oMatSettings_sub_sub_sub_sub.setSettingsValue( "Result" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Tokens", "elr_Result_b3_t0" );
+					oMatSettings_sub_sub_sub_sub_sub.setStringValue( "Label", "Result" );
+					oMatSettings_sub_sub = oMatSettings_sub.setSettingsValue( "Connections" );
+					oMatSettings_sub_sub_sub = oMatSettings_sub_sub.setSettingsValue( "Connection_0" );
+					oMatSettings_sub_sub_sub.setStringValue( "SourceBrick", "Brick_2" );
+					oMatSettings_sub_sub_sub.setStringValue( "TargetBrick", "Brick_3" );
+					oMatSettings_sub_sub_sub.setStringValue( "SourceParam", "material" );
+					oMatSettings_sub_sub_sub.setStringValue( "TargetParam", "Result" );
+					oMatSettings_sub_sub_sub = oMatSettings_sub_sub.setSettingsValue( "Connection_1" );
+					oMatSettings_sub_sub_sub.setStringValue( "SourceBrick", "Brick_2" );
+					oMatSettings_sub_sub_sub.setStringValue( "TargetBrick", "Brick_1" );
+					oMatSettings_sub_sub_sub.setStringValue( "SourceParam", "color_id" );
+					oMatSettings_sub_sub_sub.setStringValue( "TargetParam", "value_value_arg" );
+					oMatSettings_sub.setStringValue( "BrickUserName", "Material" );
+					oMatSettings_sub.setStringValue( "Identifier", "{8aa68274-a19d-45f7-b45a-4898b1b31b67}" );
+					var oCheckMaterial = oNewMaterial.setAttributes( oMatSettings );
+					delete oMatSettings;
+					if( oCheckMaterial != oNewMaterial ){
+						delete oNewMaterial;
+						oNewMaterial = oCheckMaterial;
+					}
+				}catch( e ){ debug( e ); }
+			}
+			break;
+		}
+		if( oNewMaterial == undefined )
+		{
+			oNewMaterial = new DzDefaultMaterial;
+		}
+		oNewMaterial.setName( oMaterial.name );
+		oNewMaterial.setLabel( oMaterial.getLabel() );
+		this.m_aNewMaterials = g_oArrayHelper.addToArray( this.m_aNewMaterials, oNewMaterial );
+		bSwap = true;
+	}
+	else 
+	{
+		oNewMaterial = this.m_aNewMaterials[ nIndex ];
+		bSwap = true;
+	}
+
+	if( bSwap )
+	{
+		oNewMaterial.copyFrom( oMaterial );
+		oShape.replaceMaterial( oMaterial, oNewMaterial );
+	}
+	else 
+	{
+		print( String( "Error: %1, DsActions::buildMaterial( %2, %3 );" ).arg( g_sSCRIPT_NAME ).arg( oShape.name ).arg( oMaterial.getLabel() ) );
+	}
+
+	this.m_oElement = oNewMaterial;
+}
+
+/*********************************************************************/
+DsActions.prototype.begin = function()
+{
+	var bSelected = false;
+	var bRoot = false;
+	if( g_oGui.getSurfaces() == g_sSELECTED )
+	{
+		bSelected = true;
+		bRoot = true;
+	}
+	if( g_oGui.getSurfaces() == g_sALL )
+	{
+		bRoot = true;
+	}
+	
+	if( g_oGui.getMapSettings() == g_sIGNORE_MAPS )
+		g_oPresetHelper.setMapSetting( DzPresetHelper.Ignore );
+	else
+		g_oPresetHelper.setMapSetting( DzPresetHelper.Replace );
+
+	setBusyCursor();
+	this.m_aNodes = g_oSceneHelper.collectNodes( true, true, true );
+	beginUndo();
+	for( var i = 0; i < this.m_aNodes.length; i++ ){
+		this.m_oNode = this.m_aNodes[ i ];
+		this.m_aMaterials = new Array;
+		this.m_aNewMaterials = new Array;
+		this.m_aMaterialShapes = new Array;
+		g_oPresetHelper.collectMaterials( this.m_oNode, false, bSelected, bRoot );
+		this.m_aMaterials = g_oPresetHelper.getCollectedMaterials();
+		this.m_aMaterialShapes = g_oPresetHelper.getCollectedMaterialShapes();
+		for( var j = 0; j < this.m_aMaterials.length; j++ )
+			this.setMaterialProperties( this.m_aMaterials[ j ], undefined );
+	}
+	acceptUndo( String( "\"%1\"" ).arg( g_sSCRIPT_NAME ) );
+	clearBusyCursor();
+}
+
+/*********************************************************************/
+DsActions.prototype.setMaterialProperties = function( oMaterial, oShape ){
+	this.m_oElement = oMaterial;
+	this.m_sMaterialType = "DzBrickMaterial";
+	this.m_sMaterialName = "Material";
+	this.prepareMaterial();
+	g_oPresetHelper.setTargetElement( this.m_oElement );
+	g_oPresetHelper.setPropertyWithString( "Tags", "" );
+	g_oPresetHelper.setNumericProperty( "UV Set",  [ "Default UVs" ] );
+	g_oPresetHelper.setNumericProperty( "Smooth On",  [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Smooth Angle", true, 0, 180, [ 89.9 ] );
+	g_oPresetHelper.setNumericProperty( "Render Priority",  [ "Normal" ] );
+	g_oPresetHelper.setNumericProperty( "Propagate Priority",  [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Follow Blend", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Value", true, -1, 1, [ 0 ] );
+	g_oPresetHelper.setPropertyWithString( "color_texture", "" );
+	g_oPresetHelper.setPropertyWithString( "bump_texture", "" );
+	g_oPresetHelper.setNumericProperty( "bump_strength",  [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "coat_reflection_weight", true, 0, 1, [ 0.4 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "coat_reflection_roughness", true, 0, 1, [ 0.01 ] );
+	g_oPresetHelper.setNumericProperty( "texture_rotate",  [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "maple_wood_coated_ior", true, 1, 4, [ 1.6 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "uv_space_index", true, 0, 3, [ 0 ] );
+}
+
+g_bCONTROL_PRESSED ? g_oGui.doDialog() : g_oGui.doNoDialog();
