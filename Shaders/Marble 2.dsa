@@ -1,0 +1,579 @@
+// DAZ Studio version 4.9.2.70 filetype Shader Preset
+
+var g_sTOOL_NAME = "Shader Preset";
+var g_sDEFAULT = "Selected";
+var g_oFILE = new DzFile( getScriptFileName() );
+var g_sSCRIPT_NAME = String( "%1.%2" ).arg( g_oFILE.baseName() ).arg( g_oFILE.extension() );
+var g_bSHIFT_PRESSED = shiftPressed();
+var g_bCONTROL_PRESSED = ctrlPressed();
+
+var g_sALL = "All";
+var g_sSELECTED = "Selected";
+var g_sABSOLUTE_MAPS = "Replace";
+var g_sIGNORE_MAPS = "Ignore";
+
+var g_oGui = new DsInterface;
+var g_oActions = new DsActions;
+var g_oStringHelper = new DzStringHelper;
+var g_oArrayHelper = new DzArrayHelper;
+var g_oPresetHelper = new DzPresetHelper;
+var g_oSettingsHelper = new DzSettingsHelper;
+var g_oSceneHelper = new DzSceneHelper;
+
+/***********************************************************************
+***** DsInterface Prototype *****
+***********************************************************************/
+
+/*********************************************************************/
+function DsInterface()
+{
+	this.m_nMARGIN = 5;
+	this.m_nSPACING = 5;
+	this.m_nMIN_BTN_WIDTH = 80;
+	this.m_nMAX_BTN_HEIGHT = 20;
+	this.m_nWIDGET_WIDTH = 190;
+	this.m_aBoolNames = new Array;
+	this.m_aBoolObjs = new Array;
+	this.m_aStrNames = new Array;
+	this.m_aStrObjs = new Array;
+	this.m_aCmbNames = new Array;
+	this.m_aCmbObjs = new Array;
+	this.m_wDlg, this.m_wTabStack;
+	this.m_wOptionPage, this.m_wPrefsPage;
+	this.m_wCombGB, this.m_wPrefsGB;
+	this.m_wSrfcsLbl, this.m_wMpSttngsLbl;
+	this.m_wSurfaces, this.m_wMapSettings;
+	this.m_wHelpBtn, this.m_wAcceptBtn, this.m_wCancelBtn;
+	this.m_wRcrdOnExec, this.m_wRcrdBtn, this.m_wRdBtn, this.m_wDfltBtn;
+
+}
+/***********************************************************************/
+DsInterface.superclass = Object;
+
+/*********************************************************************/
+DsInterface.prototype.doCommon = function()
+{
+	this.m_wDlg = new DzDialog;
+	this.m_wTabStack = new DzTabWidget( this.m_wDlg );
+	this.m_wOptionPage = new DzVGroupBox( this.m_wTabStack );
+	this.m_wCombGB = new DzVGroupBox( this.m_wOptionPage );
+	this.m_wSrfcsLbl = new DzLabel( this.m_wCombGB );
+	this.m_wSurfaces = new DzComboBox( this.m_wCombGB );
+	this.m_wSurfaces.insertItem( g_sALL );
+	this.m_wSurfaces.insertItem( g_sSELECTED );
+	this.m_aCmbObjs.push( this.m_wSurfaces );
+	this.m_aCmbNames.push( "cbSurfaces" );
+	this.m_wMpSttngsLbl = new DzLabel( this.m_wCombGB );
+	this.m_wMapSettings = new DzComboBox( this.m_wCombGB );
+	this.m_wMapSettings.insertItem( g_sABSOLUTE_MAPS );
+	this.m_wMapSettings.insertItem( g_sIGNORE_MAPS );
+	this.m_aCmbObjs.push( this.m_wMapSettings );
+	this.m_aCmbNames.push( "cbMapSettings" );
+	this.m_wPrefsPage = new DzVGroupBox( this.m_wTabStack );
+	this.m_wPrefsGB = new DzVGroupBox( this.m_wPrefsPage );
+	this.m_wRcrdOnExec = new DzCheckBox( this.m_wPrefsGB );
+	this.m_aBoolObjs.push( this.m_wRcrdOnExec );
+	this.m_aBoolNames.push( "rcrdOnExec" );
+	this.setDefaults();
+}
+
+/*********************************************************************/
+DsInterface.prototype.doDialog = function()
+{
+	this.doCommon();
+	var oHelp = App.getHelpMgr();
+	var oMgr = MainWindow.getActionMgr();
+	var oAction = oMgr ? oMgr.findAction( "DzWhatsThisAction" ) : undefined;
+	this.m_wDlg.caption = String( "%1 (%2)" ).arg( g_sTOOL_NAME ).arg( g_sSCRIPT_NAME );
+	this.m_wDlg.whatsThis = String( "<b>File : </b> %1<br>" ).arg( g_sSCRIPT_NAME ) +
+							String( "<b>Type : </b> %2<br>" ).arg( getScriptType() ) +
+							String( "<b>Size : </b> %3<br>" ).arg( g_oFILE.sizeStr() ) +
+							String( "<b>Version : </b> %4<br>" ).arg( getScriptVersionString() ) +
+							String( "<b>Created : </b> %5<br>" ).arg( g_oFILE.created().toString( "dddd, MMMM d yyyy h:mm ap" ) ) +
+							String( "<b>Modified : </b> %6" ).arg( g_oFILE.lastModified().toString( "dddd, MMMM d yyyy h:mm ap" ) );
+	var wDlgLayout = new DzGridLayout( this.m_wDlg );
+	wDlgLayout.margin = this.m_nMARGIN;
+	wDlgLayout.spacing = this.m_nSPACING;
+	wDlgLayout.addMultiCellWidget( this.m_wTabStack, 0, 0, 0, 2 );
+	var wDlgBtnsGB = new DzGroupBox( this.m_wDlg );
+	wDlgBtnsGB.flat = true;
+	var wDlgBtnsLyt = new DzGridLayout( wDlgBtnsGB );
+	wDlgBtnsLyt.margin = this.m_nMARGIN;
+	wDlgBtnsLyt.spacing = this.m_nSPACING;
+	this.m_wHelpBtn = new DzPushButton( wDlgBtnsGB );
+	this.m_wHelpBtn.pixmap = new Pixmap( String( "%1/images/icons/whatsthissmallicon.png" ).arg( App.getResourcesPath() ) );
+	this.m_wHelpBtn.maxHeight = this.m_nMAX_BTN_HEIGHT;
+	if( oAction )
+	{
+		this.m_wHelpBtn.clicked.connect( oAction, "trigger()" );
+	}
+	this.m_wHelpBtn.toolTip = oHelp.getToolTip( "WhatsThis" );
+	this.m_wHelpBtn.whatsThis = oHelp.getHelpString( "WhatsThis" );
+	wDlgBtnsLyt.addWidget( this.m_wHelpBtn, 0, 0 );
+	wDlgBtnsLyt.setColStretch( 1, 1 );
+	this.m_wAcceptBtn = new DzPushButton( wDlgBtnsGB );
+	this.m_wAcceptBtn.text = "&Accept";
+	this.m_wAcceptBtn.minWidth = this.m_nMIN_BTN_WIDTH;
+	this.m_wAcceptBtn.maxHeight = this.m_nMAX_BTN_HEIGHT;
+	this.m_wDlg.setAcceptButton( this.m_wAcceptBtn );
+	this.m_wAcceptBtn.toolTip = oHelp.getToolTip( "AcceptDialog" );
+	this.m_wAcceptBtn.whatsThis = oHelp.getHelpString( "AcceptDialog" );
+	wDlgBtnsLyt.addWidget( this.m_wAcceptBtn, 0, 2 );
+	this.m_wCancelBtn = new DzPushButton( wDlgBtnsGB );
+	this.m_wCancelBtn.text = "&Cancel";
+	this.m_wCancelBtn.minWidth = this.m_nMIN_BTN_WIDTH;
+	this.m_wCancelBtn.maxHeight = this.m_nMAX_BTN_HEIGHT;
+	this.m_wDlg.setRejectButton( this.m_wCancelBtn );
+	this.m_wCancelBtn.toolTip = oHelp.getToolTip( "CancelDialog" );
+	this.m_wCancelBtn.whatsThis = oHelp.getHelpString( "CancelDialog" );
+	wDlgBtnsLyt.addWidget( this.m_wCancelBtn, 0, 3 );
+	wDlgLayout.addMultiCellWidget( wDlgBtnsGB, 1, 1, 0, 2 );
+	this.m_wOptionPage.whatsThis = oHelp.getHelpString( "PresetOptionTab" );
+	this.m_wOptionPage.flat = true;
+	this.m_wOptionPage.insideMargin = this.m_nMARGIN;
+	this.m_wOptionPage.insideSpacing = this.m_nSPACING;
+	this.m_wCombGB.columns = 2;
+	this.m_wSrfcsLbl.text = "Surfaces :";
+	this.m_wSrfcsLbl.alignment = this.m_wSrfcsLbl.AlignRight;
+	this.m_wSrfcsLbl.whatsThis = oHelp.getHelpString( "PresetSurface" );
+	this.m_wSurfaces.minWidth = this.m_nWIDGET_WIDTH;
+	this.m_wSurfaces.whatsThis = this.m_wSrfcsLbl.whatsThis;
+	this.m_wMpSttngsLbl.text = "Map Settings :";
+	this.m_wMpSttngsLbl.alignment = this.m_wMpSttngsLbl.AlignRight;
+	this.m_wMpSttngsLbl.whatsThis = oHelp.getHelpString( "PresetSurfaceMap" );
+	this.m_wMapSettings.minWidth = this.m_nWIDGET_WIDTH;
+	this.m_wMapSettings.whatsThis = this.m_wMpSttngsLbl.whatsThis;
+	this.m_wTabStack.addTab( this.m_wOptionPage, "Options" );
+	this.m_wPrefsPage.whatsThis = oHelp.getHelpString( "PresetPrefTab" );
+	this.m_wPrefsPage.flat = true;
+	this.m_wPrefsPage.insideMargin = this.m_nMARGIN;
+	this.m_wPrefsPage.insideSpacing = this.m_nSPACING;
+	this.m_wPrefsGB.margin = this.m_nMARGIN;
+	this.m_wPrefsGB.spacing = this.m_nSPACING;
+	this.m_wRcrdOnExec.text = "Set Preferred Options on Accept";
+	this.m_wRcrdOnExec.whatsThis = oHelp.getHelpString( "PresetPrefOnAccept" );
+	this.m_wRcrdBtn = new DzPushButton( this.m_wPrefsGB );
+	this.m_wRcrdBtn.text = "&Set Preferred Options";
+	this.m_wRcrdBtn.whatsThis = oHelp.getHelpString( "PresetSetPref" );
+	this.m_wRcrdBtn.pressed.connect( this, "setOptions" );
+	this.m_wRdBtn = new DzPushButton( this.m_wPrefsGB );
+	this.m_wRdBtn.text = "&Read Preferred Options";
+	this.m_wRdBtn.whatsThis = oHelp.getHelpString( "PresetReadPref" );
+	this.m_wRdBtn.pressed.connect( this, "getOptions" );
+	this.m_wDfltBtn = new DzPushButton( this.m_wPrefsGB );
+	this.m_wDfltBtn.text = "Restore &Default Options";
+	this.m_wDfltBtn.whatsThis = oHelp.getHelpString( "PresetRestoreDef" );
+	this.m_wDfltBtn.pressed.connect( this, "setDefaults" );
+	var wNotesGB = new DzVGroupBox( this.m_wPrefsPage );
+	wNotesGB.title = "Notes :";
+	wNotesGB.margin = this.m_nMARGIN;
+	wNotesGB.spacing = this.m_nSPACING;
+	wNotesGB.minWidth = this.m_nWIDGET_WIDTH + 100;
+	var wKeyLbl = new DzLabel( wNotesGB );
+	wKeyLbl.text = oHelp.getHelpString( "PresetNotes" );
+	this.m_wTabStack.addTab( this.m_wPrefsPage, "Preferences" );
+	this.m_wDlg.maxWidth = this.m_wDlg.minWidth;
+	this.m_wDlg.maxHeight = this.m_wDlg.minHeight;
+	this.getOptions();
+	if( this.m_wDlg.exec() )
+	{
+		if( this.m_wRcrdOnExec.checked )
+		{
+			this.setOptions();
+		}
+		g_oActions.begin();
+	}
+}
+
+/*********************************************************************/
+DsInterface.prototype.doNoDialog = function()
+{
+	this.doCommon();
+	if( g_bSHIFT_PRESSED )
+	{
+		this.getOptions();
+	}
+	g_oActions.begin();
+}
+
+/*********************************************************************/
+DsInterface.prototype.setDefaults = function()
+{
+	for( var i = 0; i < this.m_wSurfaces.count; i++ )
+	{
+		if( this.m_wSurfaces.text( i ) == g_sDEFAULT )
+		{
+			this.m_wSurfaces.currentItem = i;
+			break;
+		}
+		this.m_wSurfaces.currentItem = 0;
+	}
+	for( var i = 0; i < this.m_wMapSettings.count; i++ )
+	{
+		if( this.m_wMapSettings.text( i ) == g_sABSOLUTE_MAPS )
+		{
+			this.m_wMapSettings.currentItem = i;
+			break;
+		}
+		this.m_wMapSettings.currentItem = 0;
+	}
+	this.m_wRcrdOnExec.checked = false;
+}
+
+/*********************************************************************/
+DsInterface.prototype.getOptions = function()
+{
+	for( var i = 0; i < this.m_aBoolObjs.length; i++ )
+	{
+		this.m_aBoolObjs[ i ].checked = g_oSettingsHelper.get( g_oStringHelper.stripSpaces( g_sTOOL_NAME ), this.m_aBoolNames[ i ], this.m_aBoolObjs[ i ].checked );
+	}
+	for( var i = 0; i < this.m_aStrObjs.length; i++ )
+	{
+		this.m_aStrObjs[ i ].text = g_oSettingsHelper.get( g_oStringHelper.stripSpaces( g_sTOOL_NAME ), this.m_aStrNames[ i ], this.m_aStrObjs[ i ].text );
+	}
+	for( var i = 0; i < this.m_aCmbObjs.length; i++ )
+	{
+		var tStr = g_oSettingsHelper.get( g_oStringHelper.stripSpaces( g_sTOOL_NAME ), this.m_aCmbNames[ i ], this.m_aCmbObjs[ i ].currentText );
+		for( var j = 0; j < this.m_aCmbObjs[ i ].count; j++ )
+		{
+			if( this.m_aCmbObjs[ i ].text( j ) == tStr )
+			{
+				this.m_aCmbObjs[ i ].currentItem = j;
+				break;
+			}
+		}
+	}
+}
+
+/*********************************************************************/
+DsInterface.prototype.setOptions = function()
+{
+	for( var i = 0; i < this.m_aBoolObjs.length; i++ )
+	{
+		g_oSettingsHelper.set( g_oStringHelper.stripSpaces( g_sTOOL_NAME ), this.m_aBoolNames[ i ], this.m_aBoolObjs[ i ].checked );
+	}
+	for( var i = 0; i < this.m_aStrObjs.length; i++ )
+	{
+		g_oSettingsHelper.set( g_oStringHelper.stripSpaces( g_sTOOL_NAME ), this.m_aStrNames[ i ], this.m_aStrObjs[ i ].text );
+	}
+	for( var i = 0; i < this.m_aCmbObjs.length; i++ )
+	{
+		g_oSettingsHelper.set( g_oStringHelper.stripSpaces( g_sTOOL_NAME ), this.m_aCmbNames[ i ], this.m_aCmbObjs[ i ].currentText );
+	}
+}
+
+/*********************************************************************/
+DsInterface.prototype.getSurfaces = function()
+{
+	return this.m_wSurfaces.currentText;
+}
+
+/*********************************************************************/
+DsInterface.prototype.getMapSettings = function()
+{
+	return this.m_wMapSettings.currentText;
+}
+
+/***********************************************************************
+***** DsActions Prototype *****
+***********************************************************************/
+
+/*********************************************************************/
+function DsActions()
+{
+	this.m_nSTART_TIME = Scene.getTime();
+	this.m_aNodes = new Array;
+	this.m_aMaterials = new Array;
+	this.m_aNewMaterials = new Array;
+	this.m_aMaterialShapes = new Array;
+	this.m_aMissingClasses = new Array;
+	this.m_sMaterialType;
+	this.m_sMaterialName;
+	this.m_oNode;
+	this.m_oElement;
+	this.m_bAskImage = true;
+	this.m_aImagePaths = new Array;
+
+}
+/***********************************************************************/
+DsActions.superclass = Object;
+
+/*********************************************************************/
+DsActions.prototype.processMaterials = function( oNode, aMaterials, bRecurse )
+{
+	var oObject = oNode.getObject();
+	if( oObject == undefined )
+	{
+		if( oNode.inherits("DzBone") )
+		{
+			var oSkel = oNode.getSkeleton();
+			if( oSkel != undefined && oSkel.inherits("DzLegacyFigure") )
+			{
+				var oAltGeom = oSkel.findAlternateGeometry( oNode );
+				if( oAltGeom != undefined )
+				{
+					oObject = oAltGeom.getObject();
+				}
+			}
+		}
+	}
+
+	if( oObject != undefined )
+	{
+		var nShapes = oObject.getNumShapes();
+		for( var s = 0; s < nShapes; s++ )
+		{
+			var oShape = oObject.getShape( s );
+			if( oShape != undefined )
+			{
+				var nMaterials = oShape.getNumMaterials();
+				for( var m = 0; m < nMaterials; m++ )
+				{
+					var oMaterial = oShape.getMaterial( m );
+					if( g_oArrayHelper.isInArrayByName( aMaterials, oMaterial ) != -1 )
+					{
+						this.buildMaterial( oShape, oMaterial );
+					}
+				}
+			}
+		}
+	}
+	
+	if( bRecurse ){
+		var aStack = [ oNode ];		
+		while( aStack.length > 0 ){
+			var oParent = aStack.pop();			
+			var nNodes = oParent.getNumNodeChildren();
+			var oChild;
+			for( var n = 0; n < nNodes; n++ ){
+				oChild = oParent.getNodeChild( n );
+				if( oChild.inherits( "DzBone" ) ){
+					if( oChild.getNumNodeChildren() > 0 ){
+						aStack.push( oChild );
+					}					
+					this.processMaterials( oChild, aMaterials, false );
+				}
+			}
+		}
+	}
+}
+
+/*********************************************************************/
+DsActions.prototype.prepareMaterial = function()
+{
+	var bBuildMaterial = false;
+	if( this.m_oElement.getMaterialName() != this.m_sMaterialName )
+	{
+		bBuildMaterial = true;
+	}
+	else if( this.m_sMaterialType != this.m_oElement.className())
+	{
+		bBuildMaterial = true;
+	}
+	
+	if( bBuildMaterial )
+		this.processMaterials( this.m_oNode, [ this.m_oElement ], true );
+}
+	
+/*********************************************************************/
+DsActions.prototype.buildMaterial = function( oShape, oMaterial )
+{
+	var bSwap = false;
+	var oNewMaterial;
+	var nIndex = g_oArrayHelper.isInArrayByName( this.m_aNewMaterials, oMaterial );
+	if( nIndex < 0 )
+	{
+		switch( this.m_sMaterialName )
+		{
+			case "Iray Uber":
+			{
+				try{
+					oNewMaterial = new DzUberIrayMaterial;
+					var oMatSettings = new DzSettings;
+					oMatSettings.setStringValue( "AttributesMode", "Scripting" );
+					var oCheckMaterial = oNewMaterial.setAttributes( oMatSettings );
+					delete oMatSettings;
+					if( oCheckMaterial != oNewMaterial ){
+						delete oNewMaterial;
+						oNewMaterial = oCheckMaterial;
+					}
+				}catch( e ){ debug( e ); }
+			}
+			break;
+		}
+		if( oNewMaterial == undefined )
+		{
+			oNewMaterial = new DzDefaultMaterial;
+		}
+		oNewMaterial.setName( oMaterial.name );
+		oNewMaterial.setLabel( oMaterial.getLabel() );
+		this.m_aNewMaterials = g_oArrayHelper.addToArray( this.m_aNewMaterials, oNewMaterial );
+		bSwap = true;
+	}
+	else 
+	{
+		oNewMaterial = this.m_aNewMaterials[ nIndex ];
+		bSwap = true;
+	}
+
+	if( bSwap )
+	{
+		oNewMaterial.copyFrom( oMaterial );
+		oShape.replaceMaterial( oMaterial, oNewMaterial );
+	}
+	else 
+	{
+		print( String( "Error: %1, DsActions::buildMaterial( %2, %3 );" ).arg( g_sSCRIPT_NAME ).arg( oShape.name ).arg( oMaterial.getLabel() ) );
+	}
+
+	this.m_oElement = oNewMaterial;
+}
+
+/*********************************************************************/
+DsActions.prototype.begin = function()
+{
+	var bSelected = false;
+	var bRoot = false;
+	if( g_oGui.getSurfaces() == g_sSELECTED )
+	{
+		bSelected = true;
+		bRoot = true;
+	}
+	if( g_oGui.getSurfaces() == g_sALL )
+	{
+		bRoot = true;
+	}
+	
+	if( g_oGui.getMapSettings() == g_sIGNORE_MAPS )
+		g_oPresetHelper.setMapSetting( DzPresetHelper.Ignore );
+	else
+		g_oPresetHelper.setMapSetting( DzPresetHelper.Replace );
+
+	setBusyCursor();
+	this.m_aNodes = g_oSceneHelper.collectNodes( true, true, true );
+	beginUndo();
+	for( var i = 0; i < this.m_aNodes.length; i++ ){
+		this.m_oNode = this.m_aNodes[ i ];
+		this.m_aMaterials = new Array;
+		this.m_aNewMaterials = new Array;
+		this.m_aMaterialShapes = new Array;
+		g_oPresetHelper.collectMaterials( this.m_oNode, false, bSelected, bRoot );
+		this.m_aMaterials = g_oPresetHelper.getCollectedMaterials();
+		this.m_aMaterialShapes = g_oPresetHelper.getCollectedMaterialShapes();
+		for( var j = 0; j < this.m_aMaterials.length; j++ )
+			this.setMaterialProperties( this.m_aMaterials[ j ], undefined );
+	}
+	acceptUndo( String( "\"%1\"" ).arg( g_sSCRIPT_NAME ) );
+	clearBusyCursor();
+}
+
+/*********************************************************************/
+DsActions.prototype.setMaterialProperties = function( oMaterial, oShape ){
+	this.m_oElement = oMaterial;
+	this.m_sMaterialType = "DzUberIrayMaterial";
+	this.m_sMaterialName = "Iray Uber";
+	this.prepareMaterial();
+	g_oPresetHelper.setTargetElement( this.m_oElement );
+	g_oPresetHelper.setPropertyWithString( "Tags", "" );
+	g_oPresetHelper.setNumericProperty( "UV Set",  [ "Default UVs" ] );
+	g_oPresetHelper.setNumericProperty( "Smooth On",  [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Smooth Angle", true, 0, 180, [ 89.9 ] );
+	g_oPresetHelper.setNumericProperty( "Render Priority",  [ "Normal" ] );
+	g_oPresetHelper.setNumericProperty( "Propagate Priority",  [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Follow Blend", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericProperty( "Base Mixing",  [ "PBR Metallicity/Roughness" ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Metallic Weight", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Diffuse Weight", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setColorProperty( "Diffuse Color",  [ 255, 255, 255 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Diffuse Strength", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Diffuse Roughness", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Diffuse Overlay Weight", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setColorProperty( "Diffuse Overlay Color",  [ 192, 192, 192 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Diffuse Overlay Roughness", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Translucency Weight", true, 0, 1, [ 0.72 ] );
+	g_oPresetHelper.setNumericProperty( "Base Color Effect",  [ "Scatter & Transmit" ] );
+	g_oPresetHelper.setColorProperty( "Translucency Color",  [ 255, 255, 255 ] );
+	g_oPresetHelper.setColorProperty( "SSS Reflectance Tint",  [ 255, 255, 255 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Glossy Weight", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Glossy Layered Weight", true, 0, 1, [ 0.5 ] );
+	g_oPresetHelper.setNumericProperty( "Share Glossy Inputs",  [ 1 ] );
+	g_oPresetHelper.setColorProperty( "Glossy Color",  [ 255, 255, 255 ] );
+	g_oPresetHelper.setNumericProperty( "Glossy Color Effect",  [ "Scatter & Transmit" ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Glossy Reflectivity", true, 0, 1, [ 0.5 ] );
+	g_oPresetHelper.setColorProperty( "Glossy Specular",  [ 59, 59, 59 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Glossy Roughness", true, 0, 1, [ 0.103896 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Glossiness", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Glossy Anisotropy", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Backscattering Weight", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setColorProperty( "Backscattering Color",  [ 255, 255, 255 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Backscattering Roughness", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Backscattering Glossiness", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Backscattering Anisotropy", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Refraction Index", true, 1, 5, [ 1.5 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Refraction Weight", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setColorProperty( "Refraction Color",  [ 255, 255, 255 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Refraction Roughness", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Refraction Glossiness", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Abbe", true, 0, 100, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Glossy Anisotropy Rotations", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericProperty( "Base Thin Film",  [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Base Thin Film IOR", true, 1, 5, [ 1.5 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Bump Strength", true, 0, 2, [ 0.987013 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Normal Map", true, 0, 1, [ 0.103896 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Metallic Flakes Weight", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setColorProperty( "Metallic Flakes Color",  [ 255, 255, 255 ] );
+	g_oPresetHelper.setNumericProperty( "Metallic Flakes Color Effect",  [ "Scatter Only" ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Metallic Flakes Roughness", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Metallic Flakes Glossiness", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericProperty( "Metallic Flakes Size",  [ 0.001 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Metallic Flakes Strength", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericProperty( "Metallic Flakes Density",  [ 1 ] );
+	g_oPresetHelper.setNumericProperty( "Metallic Flakes Thin Film",  [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Metallic Flakes Thin Film IOR", true, 1, 5, [ 1.5 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Top Coat Weight", true, 0, 1, [ 2 ] );
+	g_oPresetHelper.setColorProperty( "Top Coat Color",  [ 255, 230, 212 ] );
+	g_oPresetHelper.setNumericProperty( "Top Coat Color Effect",  [ "Scatter Only" ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Top Coat Roughness", true, 0, 1, [ 0.0387296 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Top Coat Glossiness", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericProperty( "Top Coat Layering Mode",  [ "Reflectivity" ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Reflectivity", true, 0, 1, [ 0.5 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Top Coat IOR", true, 1, 5, [ 1.5 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Top Coat Curve Normal", true, 0, 1, [ 0.04 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Top Coat Curve Grazing", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Top Coat Curve Exponent", true, 0, 10, [ 5 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Top Coat Anisotropy", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Top Coat Rotations", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericProperty( "Top Coat Thin Film",  [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Top Coat Thin Film IOR", true, 1, 5, [ 1.5 ] );
+	g_oPresetHelper.setNumericProperty( "Top Coat Bump Mode",  [ "Height Map" ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Top Coat Bump", true, 0, 2, [ 1 ] );
+	g_oPresetHelper.setNumericProperty( "Thin Walled",  [ 0 ] );
+	g_oPresetHelper.setNumericProperty( "Transmitted Measurement Distance",  [ 100 ] );
+	g_oPresetHelper.setColorProperty( "Transmitted Color",  [ 98, 40, 10 ] );
+	g_oPresetHelper.setNumericProperty( "Scattering Measurement Distance",  [ 0.01 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "SSS Amount", true, 0, 1, [ 0.255598 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "SSS Direction", true, -1, 1, [ 0 ] );
+	g_oPresetHelper.setColorProperty( "Emission Color",  [ 0, 0, 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Emission Temperature", true, 0, 10000, [ 6500 ] );
+	g_oPresetHelper.setNumericProperty( "Two Sided Light",  [ 1 ] );
+	g_oPresetHelper.setPropertyWithString( "Emission Profile", "" );
+	g_oPresetHelper.setNumericProperty( "Luminance",  [ 1500 ] );
+	g_oPresetHelper.setNumericProperty( "Luminance Units",  [ "cd/m^2" ] );
+	g_oPresetHelper.setNumericProperty( "Luminous Efficacy",  [ 15 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Cutout Opacity", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Displacement Strength", true, 0, 2, [ 2 ] );
+	g_oPresetHelper.setNumericProperty( "Minimum Displacement",  [ -0.1 ] );
+	g_oPresetHelper.setNumericProperty( "Maximum Displacement",  [ 0.1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "SubD Displacement Level", true, 0, 12, [ 0 ] );
+	g_oPresetHelper.setNumericProperty( "Horizontal Tiles",  [ 1 ] );
+	g_oPresetHelper.setNumericProperty( "Horizontal Offset",  [ 0 ] );
+	g_oPresetHelper.setNumericProperty( "Vertical Tiles",  [ 1 ] );
+	g_oPresetHelper.setNumericProperty( "Vertical Offset",  [ 0 ] );
+	g_oPresetHelper.setNumericProperty( "Round Corners Radius",  [ 0 ] );
+	g_oPresetHelper.setNumericProperty( "Round Corners Across Materials",  [ 1 ] );
+	g_oPresetHelper.setNumericProperty( "Roughness Squared",  [ 1 ] );
+	g_oPresetHelper.setNumericProperty( "Glossiness Squared",  [ 0 ] );
+	g_oPresetHelper.setColorProperty( "OutlineColorID",  [ 0, 0, 0 ] );
+}
+
+g_bCONTROL_PRESSED ? g_oGui.doDialog() : g_oGui.doNoDialog();
