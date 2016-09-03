@@ -32,7 +32,7 @@ If you don't know how github work look at this beginning article https://guides.
  - We don't accept .DUF files (default format) because it's unreadeable by an text editor. 
 You need to export shaders in <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> format
  - You need to post the file shader and his picture who is generated at the same time (XXX.dsa.png)
- - When you post a shader with "Emission color" (light) you need to render it twice. One time like everyone. Second without light from camera (Choose "Explore camera" then clic on "Headlamp" then "Headlamp Mode" choose "Off") and light from scene (Open "Render settings" then clic on "Environment" and choose "Scene Only" in "Environment Mode"). The second render will have the same name like the first with one difference : Need to place (DARK) after the name like this : YOURNAMESHADER (DARK)
+ - When you post a shader with "Emission color" (light) you need to render it twice. One time like everyone. Second without light from camera (Choose "Explore camera" then clic on "Headlamp" then "Headlamp Mode" choose "Off") and light from scene (Open "Render settings" then clic on "Environment" and choose "Scene Only" in "Environment Mode"). The second render will have the same name like the first with one difference : Need to place (DARK) after the name like this : XXX (DARK).png
 
 - `Ball-scene-renders`    Render of ball scene to see how the shader look
 
