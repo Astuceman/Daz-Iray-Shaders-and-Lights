@@ -43,6 +43,7 @@ You need to export shaders in <a href="https://youtu.be/wvOotDR_cuI" target="_bl
 - `Example-renders`       Example render of one shader in many situation (no rules)
 
  - The name of the render need to have the same name of the shader
+ - The dimension of the render need to be 1280 x 720 (16:9) or 720 x 1280 (9:16)
 
 - `Stress-test`           Test scene to figure out if your shader work in every situations
 
