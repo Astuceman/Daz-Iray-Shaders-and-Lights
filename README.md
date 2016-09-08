@@ -6,10 +6,10 @@ Here you can download, use, create or contribute
 # How that work ?
 Every shaders are stored in the dedicated folders
 
-- `Shaders`                      Shaders .dsa files + icon
-- `Ball-scene-renders`           Render of ball scene to see how the shader look
-- `Example-renders`  Example render of one shader in many situation (no rules)
-- `Stress-test`          Test scene to figure out if your shader work in every situations
+- `Shaders`               Shaders .dsa files + icon
+- `Ball-scene-renders`    Render of ball scene to see how the shader look
+- `Example-renders`       Example render of one shader in many situation (no rules)
+- `Stress-test`           Test scene to figure out if your shader work in every situations
 
 There is three branch for now :
 
@@ -22,15 +22,37 @@ If you don't know how github work look at this beginning article https://guides.
 
 **Have fun**  :smiley:
 
-Rules :
+# Rules :
 - Don't post what's not yours (duh) but you can post shaders or renders if you have the direct autorisation of the creator and explain what we do here with the direct link to the project (https://github.com/Astuceman/Daz-Iray-Shaders)
 - English is the default language (duh)
-- Shader format is .DSA and not .DUF (.DUF cannot be read by an text editor)
 
-Planed in the future :
+# Folders Rules :
+- `Shaders`               Shaders .dsa files + icon
+
+ - We don't accept .DUF files (default format) because it's unreadeable by an text editor. 
+You need to export shaders in <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> format
+ - You need to post the file shader and his picture who is generated at the same time (XXX.dsa.png)
+
+- `Ball-scene-renders`    Render of ball scene to see how the shader look
+
+ - You need to render every shader you put in the `Shaders` folder 
+ - Load `material ball scene` select (everything are allready selected by default) `DAZ Material Ball` and create or apply the shader on `OuterSphere` and `Stand` and render the scene by default
+ - The name of the render need to have the same name of the shader
+ - When you post a shader with "Emission color" (light) you need to render it twice. One time like everyone. Second without light from camera (Choose "Explore camera" then clic on "Headlamp" then "Headlamp Mode" choose "Off") and light from scene (Open "Render settings" then clic on "Environment" and choose "Scene Only" in "Environment Mode"). The second render will have the same name like the first with one difference : Need to place (DARK) after the name like this : XXX (DARK).png
+
+- `Example-renders`       Example render of one shader in many situation (no rules)
+
+ - The name of the render need to have the same name of the shader
+ - The dimension of the render need to be 1280 x 720 (16:9) or 720 x 1280 (9:16)
+
+- `Stress-test`           Test scene to figure out if your shader work in every situations
+
+ - The scene inside the folder are for test purpose ,use this to try your shader in different lighthning and situations 
+
+# Planed in the future :
 - shaders with texture
 - material preset
 
-Copyright :
+# Copyright :
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Licence Creative Commons Attribution - Pas d’Utilisation Commerciale - Partage dans les Mêmes Conditions 4.0 International</a>.
