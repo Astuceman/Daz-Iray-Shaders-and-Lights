@@ -6,10 +6,20 @@ Here you can download, use, create or contribute
 # How that work ?
 Every shaders are stored in the dedicated folders
 
-- `Shaders`               Shaders .dsa files + icon
+- `Shaders`               Shaders <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> files + icon
 - `Ball-scene-renders`    Render of ball scene to see how the shader look
 - `Example-renders`       Example render of one shader in many situation (no rules)
 - `Stress-test`           Test scene to figure out if your shader work in every situations
+
+# How to download and apply shaders ?
+
+Downloading is quite simple 
+- You can clone the repo entirely on your computer with the software and maintain it update
+- You can download manualy by right cliking on a shader (XXX<a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a>) and "clic save as"
+
+Apply a shader is simple too 
+- Simply drag and drop inside daz (If you don't know <a href="https://youtu.be/68EhOnllGD8" target="_blank">clic here</a>)
+
 
 How branches works for now :
 
@@ -27,11 +37,11 @@ If you don't know how github work look at this beginning article https://guides.
 - English is the default language (duh)
 
 # Folders Rules :
-- `Shaders`               Shaders .dsa files + icon
+- `Shaders`               Shaders <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> files + icon
 
  - We don't accept .DUF files (default format) because it's unreadeable by an text editor. 
 You need to export shaders in <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> format
- - You need to post the file shader and his picture who is generated at the same time (XXX.dsa.png)
+ - You need to post the file shader and his picture who is generated at the same time (XXX<a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a>.png)
 
 - `Ball-scene-renders`    Render of ball scene to see how the shader look
 
