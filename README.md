@@ -14,7 +14,7 @@ Every shaders are stored in the dedicated folders
 # How to download and apply shaders ?
 
 Downloading is quite simple : 
-- You can clone the repo entirely on your computer with the software and maintain it update
+- You can clone the repo entirely on your computer with the <a href="https://desktop.github.com/" target="_blank">software</a> and maintain it up to date
 - You can download manually by right clicking on a shader (XXX<a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a>) and "clic save as"
 
 Apply a shader is simple too :
