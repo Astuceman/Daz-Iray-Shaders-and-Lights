@@ -14,8 +14,8 @@ Every shaders are stored in the dedicated folders
 How branches works for now :
 
 1. **Master** : every one will see it at first and it need to be test and bug free. This is the stable branch
-2. **New__Yourname** : When you want to upload a new shader create a new branch named `New__Yourname` and don't forget to ask some feedbacks if you need it
-3. **Update_Yourname** : Basicaly when you want to polish or update any file. Clone the `Master` branch, name it `Update_Yourname` and add modification to something that exist allready. Don't forget to ask some feedbacks if you need it
+2. **New__Yourname** : When you want to upload a new shader create a new branch named `New__Yourname` and don't forget to ask some feedbacks if you need it. Your branch will be merged with the `Master` branch at the end
+3. **Update_Yourname** : Basicaly when you want to polish or update any file. Clone the `Master` branch, name it `Update_Yourname` and add modification to something that exist allready. Don't forget to ask some feedbacks if you need it. Your branch will be merged with the `Master` branch at the end
 
 
 If you don't know how github work look at this beginning article https://guides.github.com/activities/hello-world/ or `ask me` for help
