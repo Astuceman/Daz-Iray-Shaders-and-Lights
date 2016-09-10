@@ -13,11 +13,11 @@ Every shaders are stored in the dedicated folders
 
 # How to download and apply shaders ?
 
-Downloading is quite simple 
+Downloading is quite simple : 
 - You can clone the repo entirely on your computer with the software and maintain it update
-- You can download manualy by right cliking on a shader (XXX<a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a>) and "clic save as"
+- You can download manually by right clicking on a shader (XXX<a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a>) and "clic save as"
 
-Apply a shader is simple too 
+Apply a shader is simple too :
 - Simply drag and drop inside daz (If you don't know <a href="https://youtu.be/68EhOnllGD8" target="_blank">clic here</a>)
 
 
