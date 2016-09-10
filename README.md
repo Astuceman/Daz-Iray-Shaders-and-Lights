@@ -21,7 +21,7 @@ Apply a shader is simple too
 - Simply drag and drop inside daz (If you don't know <a href="https://youtu.be/68EhOnllGD8" target="_blank">clic here</a>)
 
 
-How branches works for now :
+# How branches works for now :
 
 1. **Master** : every one will see it at first and it need to be test and bug free. This is the stable branch
 2. **New_Yourname** : When you want to upload a new shader create a new branch named `New_Yourname` from `Master` and don't forget to ask some feedbacks if you need it. Your branch will be merged with the `Master` branch at the end
