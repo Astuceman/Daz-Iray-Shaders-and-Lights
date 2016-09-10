@@ -11,6 +11,7 @@ Every shaders are stored in the dedicated folders
 - `Example-renders`       Example render of one shader in many situation (no rules)
 - `Stress-test`           Test scene to figure out if your shader work in every situations
 
+How branches works for now :
 
 1. **Master** : every one will see it at first and it need to be test and bug free. This is the stable branch
 2. **New__Yourname** : When you want to upload a new shader create a new branch named `New__Yourname` and don't forget to ask some feedbacks if you need it
