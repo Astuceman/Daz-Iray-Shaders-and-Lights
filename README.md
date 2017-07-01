@@ -7,7 +7,7 @@ Here you can download, use, create or contribute
 Every shaders and lights are stored in the dedicated folders
 
 - `Shaders`               Shaders <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> files + Render of ball scene to see how the shader look
-- `Lights`                Lights .DSA files + Render of ball scene to see how the shader look
+- `Lights`                Lights .DSA files + Render of ball scene to see how the light look
 - `Example-renders`       Example render of one shader or light in many situation (no rules)
 - `Stress-test`           Test scene to figure out if your shader or light work in every situations
 
