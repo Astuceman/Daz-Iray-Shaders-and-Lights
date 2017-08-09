@@ -1,4 +1,4 @@
-// DAZ Studio version 4.9.2.70 filetype Shader Preset
+// DAZ Studio version 4.9.4.117 filetype Shader Preset
 
 var g_sTOOL_NAME = "Shader Preset";
 var g_sDEFAULT = "Selected";
@@ -488,12 +488,21 @@ DsActions.prototype.setMaterialProperties = function( oMaterial, oShape ){
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Diffuse Strength", true, 0, 1, [ 1 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Diffuse Roughness", true, 0, 1, [ 0 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Diffuse Overlay Weight", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericProperty( "Diffuse Overlay Weight Squared",  [ 0 ] );
 	g_oPresetHelper.setColorProperty( "Diffuse Overlay Color",  [ 192, 192, 192 ] );
+	g_oPresetHelper.setNumericProperty( "Diffuse Overlay Color Effect",  [ "Scatter Only" ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Diffuse Overlay Roughness", true, 0, 1, [ 0 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Translucency Weight", true, 0, 1, [ 0.675325 ] );
 	g_oPresetHelper.setNumericProperty( "Base Color Effect",  [ "Scatter Only" ] );
 	g_oPresetHelper.setColorProperty( "Translucency Color",  [ 255, 255, 255 ] );
 	g_oPresetHelper.setColorProperty( "SSS Reflectance Tint",  [ 255, 255, 255 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Dual Lobe Specular Weight", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Dual Lobe Specular Reflectivity", true, 0, 1, [ 0.5 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Specular Lobe 1 Roughness", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Specular Lobe 2 Roughness", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Specular Lobe 1 Glossiness", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Specular Lobe 2 Glossiness", true, 0, 1, [ 1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Dual Lobe Specular Ratio", true, 0, 1, [ 0.85 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Glossy Weight", true, 0, 1, [ 0 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Glossy Layered Weight", true, 0, 1, [ 0 ] );
 	g_oPresetHelper.setNumericProperty( "Share Glossy Inputs",  [ 1 ] );
@@ -550,19 +559,24 @@ DsActions.prototype.setMaterialProperties = function( oMaterial, oShape ){
 	g_oPresetHelper.setNumericProperty( "Thin Walled",  [ 1 ] );
 	g_oPresetHelper.setNumericProperty( "Transmitted Measurement Distance",  [ 0.1 ] );
 	g_oPresetHelper.setColorProperty( "Transmitted Color",  [ 0, 0, 0 ] );
+	g_oPresetHelper.setNumericProperty( "SSS Mode",  [ "Mono" ] );
 	g_oPresetHelper.setNumericProperty( "Scattering Measurement Distance",  [ 0.1 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "SSS Amount", true, 0, 1, [ 0 ] );
+	g_oPresetHelper.setColorProperty( "SSS Color",  [ 0, 0, 0 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "SSS Direction", true, -1, 1, [ 0 ] );
-	g_oPresetHelper.setColorProperty( "Emission Color",  [ 255, 255, 255 ] );
+	g_oPresetHelper.setColorProperty( "Emission Color",  [ 255, 255, 255 ],
+		"C:/Users/alexq/Documents/GitHub/Daz-Iray-Shaders-and-Lights/Textures/Sans titre-1.png" );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Emission Temperature", true, 0, 10000, [ 3100 ] );
 	g_oPresetHelper.setNumericProperty( "Two Sided Light",  [ 1 ] );
 	g_oPresetHelper.setPropertyWithString( "Emission Profile", "" );
 	g_oPresetHelper.setNumericProperty( "Luminance",  [ 1500 ] );
 	g_oPresetHelper.setNumericProperty( "Luminance Units",  [ "W" ] );
 	g_oPresetHelper.setNumericProperty( "Luminous Efficacy",  [ 15 ] );
-	g_oPresetHelper.setNumericPropertyWithAttributes( "Cutout Opacity", true, 0, 1, [ 1 ] );
-	g_oPresetHelper.setNumericPropertyWithAttributes( "Displacement Strength", true, 0, 2, [ 1 ] );
-	g_oPresetHelper.setNumericProperty( "Minimum Displacement",  [ -0.1 ] );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Cutout Opacity", true, 0, 1, [ 1 ],
+		"C:/Users/alexq/Documents/GitHub/Daz-Iray-Shaders-and-Lights/Textures/Sans titre-11.png" );
+	g_oPresetHelper.setNumericPropertyWithAttributes( "Displacement Strength", true, 0, 2, [ 1 ],
+		"C:/Users/alexq/Documents/GitHub/Daz-Iray-Shaders-and-Lights/Textures/Sans titre-11.png" );
+	g_oPresetHelper.setNumericProperty( "Minimum Displacement",  [ -0.5 ] );
 	g_oPresetHelper.setNumericProperty( "Maximum Displacement",  [ 1 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "SubD Displacement Level", true, 0, 12, [ 0 ] );
 	g_oPresetHelper.setNumericProperty( "Horizontal Tiles",  [ 1 ] );
