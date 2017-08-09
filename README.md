@@ -10,6 +10,7 @@ Every shaders and lights are stored in the dedicated folders
 - `Lights`                Lights .DSA files + Render of ball scene to see how the light look
 - `Example-renders`       Example render of one shader or light in many situation (no rules)
 - `Stress-test`           Test scene to figure out if your shader or light work in every situations
+- `Textures`              Texture who are mostly used by shaders
 
 # How to download and apply shaders or lights ?
 
@@ -38,32 +39,38 @@ If you don't know how github work look at this beginning article https://guides.
 - English is the default language (duh)
 
 # Folders Rules :
-- `Shaders`               Shaders <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> files + icon
+`Shaders`               Shaders <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> files + icon
 
- - We don't accept .DUF files (default format) because it's unreadeable by an text editor.
-You need to export shaders in <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> format
+  - We don't accept .DUF files (default format) because it's unreadeable by an text editor.
+  - You need to export shaders in <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> format
+  - Render of ball scene to see how the shader look
+  - You need to render every shader you put in the `Shaders` folder and put it in the same folder
+  - Load `material ball scene` select (everything are allready selected by default) `DAZ Material Ball` and create or apply the shader on `OuterSphere` and `Stand` and render the scene by default
+  - The name of the render need to have the same name of the shader
+  - When you post a shader with "Emission color" (light) you need to render it twice. One time like everyone. Second without light from camera (Choose "Explore camera" then clic on "Headlamp" then "Headlamp Mode" choose "Off") and light from scene (Open "Render settings" then clic on "Environment" and choose "Scene Only" in "Environment Mode"). The second render will have the same name like the first with one difference : Need to place (DARK) after the name like this : XXX (DARK).png
 
-Render of ball scene to see how the shader look
+`Lights`                Lights .DSA files + icon
 
- - You need to render every shader you put in the `Shaders` folder and put it in the same folder
- - Load `material ball scene` select (everything are allready selected by default) `DAZ Material Ball` and create or apply the shader on `OuterSphere` and `Stand` and render the scene by default
- - The name of the render need to have the same name of the shader
- - When you post a shader with "Emission color" (light) you need to render it twice. One time like everyone. Second without light from camera (Choose "Explore camera" then clic on "Headlamp" then "Headlamp Mode" choose "Off") and light from scene (Open "Render settings" then clic on "Environment" and choose "Scene Only" in "Environment Mode"). The second render will have the same name like the first with one difference : Need to place (DARK) after the name like this : XXX (DARK).png
- 
-- `Lights`                Lights .DSA files + icon
+  - Render of ball scene to see how the shader look
+  - The same rules apply as before
 
-Render of ball scene to see how the shader look
+`Example-renders`       Example render of one shader in many situation (no rules)
 
- - The same rules apply as before
+  - The name of the render need to have the same name of the shader
+  - The dimension of the render need to be 1280 x 720 (16:9) or 720 x 1280 (9:16)
 
-- `Example-renders`       Example render of one shader in many situation (no rules)
+`Stress-test`           Test scene to figure out if your shader work in every situations
 
- - The name of the render need to have the same name of the shader
- - The dimension of the render need to be 1280 x 720 (16:9) or 720 x 1280 (9:16)
+  - The scene inside the folder are for test purpose ,use this to try your shader in different lighthning and situations
 
-- `Stress-test`           Test scene to figure out if your shader work in every situations
+`Textures`              Use this textures with shaders or as a standalone
 
- - The scene inside the folder are for test purpose ,use this to try your shader in different lighthning and situations
+  - You need to create this textures by yourself or have the permission of the author
+  - The best value is a picture with 5000x5000 pix and in PNG format
+  - DON'T FORGET there is a file size limit : no more than 100 mega
+  - With the original texture add if you can, BUMP version (black and white) and NORMAL (blue and purple)
+  - For naming convention, see the files and how they are named
+  - Add the source file (PSD for photoshop for example) if the file is less than 100 mega
 
 # Planed in the future :
 - shaders with texture
