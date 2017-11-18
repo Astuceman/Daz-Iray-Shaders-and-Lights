@@ -22,23 +22,23 @@ Apply a shader is simple too :
 - Simply drag and drop inside daz (If you don't know <a href="https://youtu.be/68EhOnllGD8" target="_blank">clic here</a>)
 - If you made a fork, link into your daz database; you will get this result <a href="https://giphy.com/gifs/XUR6n6TFIyu52" target="_blank">like this</a>
 
-
-# How branches works for now :
+# How branches works for now
 
 1. **Master** : every one will see it at first and it need to be tested and bug free. This is the stable branch
 2. **New_Yourname** : When you want to upload a new shader or light create a new branch named `New_Yourname` from `Master` and don't forget to ask some feedbacks if you need it. Your branch will be merged with the `Master` branch at the end
 3. **Update_Yourname** : Basicaly when you want to polish or update any file. Create a new branch from `Master` branch, name it `Update_Yourname` and add modification to something that exist allready. Don't forget to ask some feedbacks if you need it. Your branch will be merged with the `Master` branch at the end
 
-
 If you don't know how github work look at this beginning article https://guides.github.com/activities/hello-world/ or `ask me` for help
 
 **Have fun**  :smiley:
 
-# Rules :
+# Rules
+
 - Don't post what's not yours (duh) but you can post shaders, lights or renders if you have the direct autorisation of the creator and explain what we do here with the direct link to the project (https://github.com/Astuceman/Daz-Iray-Shaders)
 - English is the default language (duh)
 
-# Folders Rules :
+# Folders Rules
+
 `Shaders`               Shaders <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> files + icon
 
   - We don't accept .DUF files (default format) because it's unreadeable by an text editor.
@@ -72,10 +72,11 @@ If you don't know how github work look at this beginning article https://guides.
   - For naming convention, see the files and how they are named
   - Add the source file (PSD for photoshop for example) if the file is less than 100 mega
 
-# Planed in the future :
+# Planed in the future
+
 - shaders with texture
 - material preset
 
-# Copyright :
+# Copyright
 
 <a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br />Ce(tte) œuvre est mise à disposition selon les termes de la <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licence Creative Commons Attribution 4.0 International</a>.
