@@ -1,4 +1,4 @@
-// DAZ Studio version 4.9.4.117 filetype Shader Preset
+// DAZ Studio version 4.10.0.123 filetype Shader Preset
 
 var g_sTOOL_NAME = "Shader Preset";
 var g_sDEFAULT = "Selected";
@@ -565,7 +565,7 @@ DsActions.prototype.setMaterialProperties = function( oMaterial, oShape ){
 	g_oPresetHelper.setColorProperty( "SSS Color",  [ 0, 0, 0 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "SSS Direction", true, -1, 1, [ 0 ] );
 	g_oPresetHelper.setColorProperty( "Emission Color",  [ 255, 255, 255 ],
-		"C:/Users/alexq/Documents/GitHub/Daz-Iray-Shaders-and-Lights/Textures/Sans titre-1.png" );
+		"/Daz-Iray-Shaders-and-Lights/Textures/Fire.png" );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Emission Temperature", true, 0, 10000, [ 3100 ] );
 	g_oPresetHelper.setNumericProperty( "Two Sided Light",  [ 1 ] );
 	g_oPresetHelper.setPropertyWithString( "Emission Profile", "" );
@@ -573,9 +573,9 @@ DsActions.prototype.setMaterialProperties = function( oMaterial, oShape ){
 	g_oPresetHelper.setNumericProperty( "Luminance Units",  [ "W" ] );
 	g_oPresetHelper.setNumericProperty( "Luminous Efficacy",  [ 15 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Cutout Opacity", true, 0, 1, [ 1 ],
-		"C:/Users/alexq/Documents/GitHub/Daz-Iray-Shaders-and-Lights/Textures/Sans titre-11.png" );
+		"/Daz-Iray-Shaders-and-Lights/Textures/Fire BUMP.png" );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "Displacement Strength", true, 0, 2, [ 1 ],
-		"C:/Users/alexq/Documents/GitHub/Daz-Iray-Shaders-and-Lights/Textures/Sans titre-11.png" );
+		"/Daz-Iray-Shaders-and-Lights/Textures/Fire BUMP.png" );
 	g_oPresetHelper.setNumericProperty( "Minimum Displacement",  [ -0.5 ] );
 	g_oPresetHelper.setNumericProperty( "Maximum Displacement",  [ 1 ] );
 	g_oPresetHelper.setNumericPropertyWithAttributes( "SubD Displacement Level", true, 0, 12, [ 0 ] );
