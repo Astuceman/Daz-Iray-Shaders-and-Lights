@@ -16,6 +16,7 @@ Every shaders and lights are stored in the dedicated folders
 
 Downloading is quite simple :
 - You can clone the repo entirely on your computer with the <a href="https://desktop.github.com/" target="_blank">software</a> and maintain it up to date
+- You can download entire repo (zip) by clicking on the green button up there
 - You can download manually by right clicking on a shader or light (XXX<a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a>) (find "Raw") and "clic save as"
 
 Apply a shader is simple too :
