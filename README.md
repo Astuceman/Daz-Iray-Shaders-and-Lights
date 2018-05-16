@@ -6,8 +6,10 @@ Here you can download, use, create or contribute
 # How that work ?
 Every shaders and lights are stored in the dedicated folders
 
-- `Shaders`               Shaders <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> files + Render of ball scene to see how the shader look
-- `Lights`                Lights .DSA files + Render of ball scene to see how the light look
+- //NEW// `Shaders`               Shaders .DUF (uncompressed) files + Render of ball scene to see how the shader look
+- //OLD// `Shaders`               Shaders <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> files + Render of ball scene to see how the shader look
+- //NEW// `Lights`                Lights .DUF (uncompressed) files + Render of ball scene to see how the light look
+- //OLD// `Lights`                Lights .DSA files + Render of ball scene to see how the light look
 - `Example-renders`       Example render of one shader or light in many situation (no rules)
 - `Stress-test`           Test scene to figure out if your shader or light work in every situations
 - `Textures`              Texture who are mostly used by shaders
@@ -23,11 +25,13 @@ Apply a shader is simple too :
 - Simply drag and drop inside daz (If you don't know <a href="https://youtu.be/68EhOnllGD8" target="_blank">clic here</a>)
 - If you made a fork, link into your daz database; you will get this result <a href="https://giphy.com/gifs/XUR6n6TFIyu52" target="_blank">like this</a>
 
+# I have a problem ... what can I do ?
+
+Open an <a href="https://github.com/Astuceman/Daz-Iray-Shaders-and-Lights/issues">issue</a> and explain your problem in detail
+
 # How branches works for now
 
 1. **Master** : every one will see it at first and it need to be tested and bug free. This is the stable branch
-2. **New_Yourname** : When you want to upload a new shader or light create a new branch named `New_Yourname` from `Master` and don't forget to ask some feedbacks if you need it. Your branch will be merged with the `Master` branch at the end
-3. **Update_Yourname** : Basicaly when you want to polish or update any file. Create a new branch from `Master` branch, name it `Update_Yourname` and add modification to something that exist allready. Don't forget to ask some feedbacks if you need it. Your branch will be merged with the `Master` branch at the end
 
 If you don't know how github work look at this beginning article https://guides.github.com/activities/hello-world/ or `ask me` for help
 
@@ -40,17 +44,16 @@ If you don't know how github work look at this beginning article https://guides.
 
 # Folders Rules
 
-`Shaders`               Shaders <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> files + icon
+`Shaders`               Shaders .DUF files + icon
 
-  - We don't accept .DUF files (default format) because it's unreadeable by an text editor.
-  - You need to export shaders in <a href="https://youtu.be/wvOotDR_cuI" target="_blank">.DSA</a> format
+  - //NEW// We only accept .DUF (uncompressed) files.
   - Render of ball scene to see how the shader look
   - You need to render every shader you put in the `Shaders` folder and put it in the same folder
   - Load `material ball scene` select (everything are allready selected by default) `DAZ Material Ball` and create or apply the shader on `OuterSphere` and `Stand` and render the scene by default
   - The name of the render need to have the same name of the shader
   - When you post a shader with "Emission color" (light) you need to render it twice. One time like everyone. Second without light from camera (Choose "Explore camera" then clic on "Headlamp" then "Headlamp Mode" choose "Off") and light from scene (Open "Render settings" then clic on "Environment" and choose "Scene Only" in "Environment Mode"). The second render will have the same name like the first with one difference : Need to place (DARK) after the name like this : XXX (DARK).png
 
-`Lights`                Lights .DSA files + icon
+`Lights`                //NEW// Lights .DUF (uncompressed) files + icon
 
   - Render of ball scene to see how the shader look
   - The same rules apply as before
@@ -67,13 +70,12 @@ If you don't know how github work look at this beginning article https://guides.
 `Textures`              Use this textures with shaders or as a standalone
 
   - You need to create this textures by yourself or have the permission of the author
-  - The best value is a picture with 5000x5000 pix and in PNG format
-  - DON'T FORGET there is a file size limit : no more than 100 mega
+  - The best value is a picture with 5000x5000 px and in PNG format
   - With the original texture add if you can, BUMP version (black and white) and NORMAL (blue and purple)
   - For naming convention, see the files and how they are named
-  - Add the source file (PSD for photoshop for example) if the file is less than 100 mega
+  - Add the source file (PSD for photoshop for example) if the file is less than 100 mega. DON'T FORGET there is a file size limit : no more than 100 mega.
+
 
 # Planed in the future
 
-- shaders with texture
 - material preset
