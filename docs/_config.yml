@@ -1,8 +1,0 @@
-title: Daz-Iray-Shaders-and-Lights
-description: Sharing and contribute Iray shaders and lights for Daz Studio
-google_analytics: 
-show_downloads: true
-theme: jekyll-theme-cayman
-
-gems:
-  - jekyll-mentions
