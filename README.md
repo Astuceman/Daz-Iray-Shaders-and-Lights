@@ -13,7 +13,7 @@ Every shaders and lights are stored in the dedicated folders.
 # How to download and apply shaders or lights ?
 
 Downloading is quite simple :
-- You can clone the repo entirely on your computer with the <a href="https://desktop.github.com/" target="_blank">software</a> and maintain it up to date.
+- You can clone the repo entirely on your computer with <a href="https://desktop.github.com/">Github Desktop</a> and maintain it up to date.
 - You can download entire repo (zip) by clicking on the green button up there.
 
 Apply a shader is simple too :
@@ -34,7 +34,7 @@ Open an <a href="https://github.com/Astuceman/Daz-Iray-Shaders-and-Lights/issues
 
 # How branches works
 
-1. **Master** : every one will see it at first and it need to be tested and bug free. This is the stable branch.
+**Master** : every one will see it at first and it need to be tested and bug free. This is the stable branch.
 
 If you don't know how github work look at this <a href="https://guides.github.com/activities/hello-world/">beginning article</a> or `ask me` for help.
 
