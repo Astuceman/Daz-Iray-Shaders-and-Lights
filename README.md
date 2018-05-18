@@ -5,11 +5,10 @@ Here you can download, use, create or contribute.
 # How that work ?
 Every shaders and lights are stored in the dedicated folders.
 
-- `Shaders`               Shaders .DUF (uncompressed) files + Render of ball scene to see how the shader look.
-- `Lights`                Lights .DUF (uncompressed) files + Render of ball scene to see how the light look.
-- `Example-renders`       Example render of one shader or light in many situation (no rules).
-- `Stress-test`           Test scene to figure out if your shader or light work in every situations.
-- `Textures`              Texture who are mostly used by shaders.
+- `Shaders Presets/DISL`               Shaders .DUF (uncompressed) files + Render of ball scene to see how the shader look.
+- `Light Presets/DISL`                Lights .DUF (uncompressed) files + Render of ball scene to see how the light look.
+- `Scenes/Stress-test`           Test scene to figure out if your shader or light work in every situations.
+- `Runtime/Textures/DISL`              Texture who are mostly used by shaders.
 
 # How to download and apply shaders or lights ?
 
@@ -25,13 +24,21 @@ Apply a shader is simple too :
 
 Open an <a href="https://github.com/Astuceman/Daz-Iray-Shaders-and-Lights/issues">issue</a> and explain your problem in detail.
 
-# How branches works for now
+# I want to contribute
+
+1. Be sure to read the `README.md`
+
+2. Make a fork using <a href="https://desktop.github.com/">Github Desktop</a>
+
+3. Make a <a href="https://help.github.com/articles/about-pull-requests/">pull request</a> (if you have a question or a problem create an <a href="https://github.com/Astuceman/Daz-Iray-Shaders-and-Lights/issues">issue</a>)
+
+# How branches works
 
 1. **Master** : every one will see it at first and it need to be tested and bug free. This is the stable branch.
 
-If you don't know how github work look at this beginning article https://guides.github.com/activities/hello-world/ or `ask me` for help.
+If you don't know how github work look at this <a href="https://guides.github.com/activities/hello-world/">beginning article</a> or `ask me` for help.
 
-**Have fun**  :smiley:
+**Have fun** :smiley:
 
 # Rules
 
@@ -40,7 +47,7 @@ If you don't know how github work look at this beginning article https://guides.
 
 # Folders Rules
 
-`Shaders`               Shaders .DUF files + icon.
+`Shaders Presets/DISL`               Shaders .DUF files + icon.
 
   - We only accept .DUF (uncompressed) files.
   - Render of ball scene to see how the shader look.
@@ -49,16 +56,16 @@ If you don't know how github work look at this beginning article https://guides.
   - The name of the render need to have the same name of the shader.
   - When you post a shader with "Emission color" (light) you need to render it without light from camera (Choose "Explore camera" then clic on "Headlamp" then "Headlamp Mode" choose "Off") and light from scene (Open "Render settings" then clic on "Environment" and choose "Scene Only" in "Environment Mode").
 
-`Lights`                Lights .DUF (uncompressed) files + icon.
+`Light Presets/DISL`                Lights .DUF (uncompressed) files + icon.
 
   - Render of ball scene to see how the shader look.
   - The same rules apply as before.
 
-`Stress-test`           Test scene to figure out if your shader work in every situations.
+`Scenes/Stress-test`           Test scene to figure out if your shader work in every situations.
 
   - The scene inside the folder are for test purpose ,use this to try your shader in different lighthning and situations.
 
-`Textures`              Use this textures with shaders or as a standalone.
+`Runtime/Textures/DISL`              Use this textures with shaders or as a standalone.
 
   - You need to create this textures by yourself or have the permission of the author.
   - The best value is a picture with 5000x5000 px and in PNG format.
