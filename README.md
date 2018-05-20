@@ -18,7 +18,7 @@ Downloading is quite simple :
 
 Apply a shader is simple too :
 - Simply drag and drop inside daz (If you don't know <a href="https://youtu.be/68EhOnllGD8" target="_blank">clic here</a>).
-- If you made a fork, link into your daz database; you will get this result <a href="https://giphy.com/gifs/XUR6n6TFIyu52" target="_blank">like this</a>.
+- If you made a fork, <a href="https://youtu.be/tGCoF0cJaFo">link into your daz database</a>; you will get this result <a href="https://giphy.com/gifs/XUR6n6TFIyu52" target="_blank">like this</a>.
 
 # I have a problem ... what can I do ?
 
