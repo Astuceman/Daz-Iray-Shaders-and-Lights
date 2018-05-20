@@ -18,7 +18,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Rock%20BUMP2.png",
+					"url" : "/Runtime/Textures/DISL/Rock%20BUMP2.png",
 					"label" : "Rock BUMP2.png"
 				}
 			]
@@ -29,7 +29,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Rock%20BUMP.png",
+					"url" : "/Runtime/Textures/DISL/Rock%20BUMP.png",
 					"label" : "Rock BUMP.png"
 				}
 			]
@@ -40,7 +40,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Rock%20NORMAL.png",
+					"url" : "/Runtime/Textures/DISL/Rock%20NORMAL.png",
 					"label" : "Rock NORMAL.png"
 				}
 			]
@@ -51,7 +51,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Rock.png",
+					"url" : "/Runtime/Textures/DISL/Rock.png",
 					"label" : "Rock.png"
 				}
 			]
@@ -2231,7 +2231,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Metallic%20Weight/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Rock%20BUMP2.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Rock%20BUMP2.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Metallic%20Weight/image_modification/scale",
@@ -2955,7 +2955,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossy%20Layered%20Weight/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Rock%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Rock%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossy%20Layered%20Weight/image_modification/scale",
@@ -3715,7 +3715,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Bump%20Strength/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Rock%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Rock%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Bump%20Strength/image_modification/grayscale_mode",
@@ -3743,7 +3743,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Normal%20Map/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Rock%20NORMAL.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Rock%20NORMAL.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Normal%20Map/image_modification/horizontal_tiles",
@@ -3767,7 +3767,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Metallic%20Flakes%20Weight/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Rock.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Rock.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Metallic%20Flakes%20Weight/image_modification/scale",
@@ -4019,7 +4019,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Weight/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Rock%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Rock%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Weight/image_modification/scale",
@@ -4775,7 +4775,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Rock%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Rock%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_modification/grayscale_mode",
