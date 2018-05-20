@@ -18,7 +18,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fabric%20BUMP.png",
+					"url" : "/Runtime/Textures/DISL/Fabric%20BUMP.png",
 					"label" : "Fabric BUMP.png"
 				}
 			]
@@ -29,7 +29,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fabric%20NORMAL.png",
+					"url" : "/Runtime/Textures/DISL/Fabric%20NORMAL.png",
 					"label" : "Fabric NORMAL.png"
 				}
 			]
@@ -2952,7 +2952,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossy%20Layered%20Weight/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fabric%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Fabric%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossy%20Layered%20Weight/image_modification/scale",
@@ -3712,7 +3712,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Bump%20Strength/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fabric%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Fabric%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Bump%20Strength/image_modification/grayscale_mode",
@@ -3740,7 +3740,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Normal%20Map/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fabric%20NORMAL.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Fabric%20NORMAL.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Normal%20Map/image_modification/horizontal_tiles",
@@ -3764,7 +3764,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Metallic%20Flakes%20Weight/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fabric%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Fabric%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Metallic%20Flakes%20Weight/image_modification/scale",
@@ -4016,7 +4016,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Weight/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fabric%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Fabric%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Weight/image_modification/scale",
@@ -4180,7 +4180,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Reflectivity/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fabric%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Fabric%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Reflectivity/image_modification/scale",
@@ -4544,7 +4544,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Bump/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fabric%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Fabric%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Bump/image_modification/grayscale_mode",
@@ -4772,7 +4772,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fabric%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Fabric%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_modification/grayscale_mode",

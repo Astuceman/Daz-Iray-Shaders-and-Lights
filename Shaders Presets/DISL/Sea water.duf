@@ -18,7 +18,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Sea%20water%20BUMP.png",
+					"url" : "/Runtime/Textures/DISL/Sea%20water%20BUMP.png",
 					"label" : "Sea water BUMP.png"
 				}
 			]
@@ -4738,7 +4738,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Sea%20water%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Sea%20water%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_modification/grayscale_mode",

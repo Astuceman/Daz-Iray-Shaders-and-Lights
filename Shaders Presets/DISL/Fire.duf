@@ -18,7 +18,7 @@
 			"map_gamma" : 0,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fire.png",
+					"url" : "/Runtime/Textures/DISL/Fire.png",
 					"label" : "Fire.png"
 				}
 			]
@@ -29,7 +29,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fire%20BUMP.png",
+					"url" : "/Runtime/Textures/DISL/Fire%20BUMP.png",
 					"label" : "Fire BUMP.png"
 				}
 			]
@@ -4628,7 +4628,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Emission%20Color/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fire.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Fire.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Emission%20Color/image_modification/scale",
@@ -4724,7 +4724,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Cutout%20Opacity/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fire%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Fire%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Cutout%20Opacity/image_modification/scale",
@@ -4764,7 +4764,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Fire%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Fire%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_modification/grayscale_mode",

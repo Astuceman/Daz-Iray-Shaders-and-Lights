@@ -18,7 +18,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Cristals.png",
+					"url" : "/Runtime/Textures/DISL/Cristals.png",
 					"label" : "Cristals.png"
 				}
 			]
@@ -29,7 +29,7 @@
 			"map_gamma" : 0,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Cristals%20BUMP.png",
+					"url" : "/Runtime/Textures/DISL/Cristals%20BUMP.png",
 					"label" : "Cristals BUMP.png"
 				}
 			]
@@ -2927,7 +2927,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossy%20Layered%20Weight/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Cristals.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Cristals.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossy%20Layered%20Weight/image_modification/scale",
@@ -3779,7 +3779,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Metallic%20Flakes%20Color/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Cristals.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Cristals.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Metallic%20Flakes%20Color/image_modification/scale",
@@ -3991,7 +3991,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Weight/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Cristals.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Cristals.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Weight/image_modification/scale",
@@ -4611,7 +4611,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Emission%20Color/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Cristals%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Cristals%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Emission%20Color/image_modification/scale",
@@ -4747,7 +4747,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Cristals.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Cristals.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_modification/grayscale_mode",

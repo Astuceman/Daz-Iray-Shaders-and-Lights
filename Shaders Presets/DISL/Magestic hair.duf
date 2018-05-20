@@ -18,7 +18,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Hair%20fluent%20CUTOUT.png",
+					"url" : "/Runtime/Textures/DISL/Hair%20fluent%20CUTOUT.png",
 					"label" : "Hair fluent CUTOUT.png"
 				}
 			]
@@ -29,7 +29,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Hair%20BUMP.png",
+					"url" : "/Runtime/Textures/DISL/Hair%20BUMP.png",
 					"label" : "Hair BUMP.png"
 				}
 			]
@@ -40,7 +40,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Hair%20CUTOUT.png",
+					"url" : "/Runtime/Textures/DISL/Hair%20CUTOUT.png",
 					"label" : "Hair CUTOUT.png"
 				}
 			]
@@ -2220,7 +2220,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Metallic%20Weight/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Hair%20fluent%20CUTOUT.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Hair%20fluent%20CUTOUT.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Metallic%20Weight/image_modification/scale",
@@ -3704,7 +3704,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Bump%20Strength/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Hair%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Hair%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Bump%20Strength/image_modification/grayscale_mode",
@@ -4536,7 +4536,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Bump/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Hair%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Hair%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Bump/image_modification/grayscale_mode",
@@ -4724,7 +4724,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Cutout%20Opacity/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Hair%20CUTOUT.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Hair%20CUTOUT.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Cutout%20Opacity/image_modification/scale",
@@ -4764,7 +4764,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Hair%20BUMP.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Hair%20BUMP.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_modification/grayscale_mode",

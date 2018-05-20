@@ -18,7 +18,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Ver.png",
+					"url" : "/Runtime/Textures/DISL/Ver.png",
 					"label" : "Ver.png"
 				}
 			]
@@ -4713,7 +4713,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Cutout%20Opacity/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Ver.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Ver.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Cutout%20Opacity/image_modification/scale",
@@ -4753,7 +4753,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_file",
-				"keys" : [ [ 0, "/Runtime/Textures/Astuceman/Iray%20Shaders%20Open%20Source%20V3/Ver.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Ver.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_modification/grayscale_mode",
