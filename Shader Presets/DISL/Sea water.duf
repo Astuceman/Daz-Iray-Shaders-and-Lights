@@ -1,15 +1,15 @@
 {
 	"file_version" : "0.6.0.0",
 	"asset_info" : {
-		"id" : "/Shaders/Sea%20water.duf",
+		"id" : "/Y%3A/GITHUB/Daz-Iray-Shaders-and-Lights/Shader%20Presets/DISL/Sea%20water.duf",
 		"type" : "preset_shader",
 		"contributor" : {
-			"author" : "Astuceman",
+			"author" : "astuceman",
 			"email" : "",
-			"website" : "http://astuceman.blogspot.fr"
+			"website" : ""
 		},
 		"revision" : "1.0",
-		"modified" : "2018-05-18T03:19:54Z"
+		"modified" : "2019-12-14T10:40:17Z"
 	},
 	"image_library" : [
 		{
@@ -26,7 +26,7 @@
 	],
 	"material_library" : [
 		{
-			"id" : "Default",
+			"id" : "OuterSphere",
 			"diffuse" : {
 				"channel" : {
 					"id" : "diffuse",
@@ -58,6 +58,98 @@
 				{
 					"type" : "studio_material_channels",
 					"channels" : [
+						{
+							"channel" : {
+								"id" : "Tags",
+								"type" : "string",
+								"label" : "Tags",
+								"value" : ""
+							},
+							"group" : "/General",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
+								"id" : "Line Preview Color",
+								"type" : "color",
+								"label" : "Line Preview Color",
+								"value" : [ 0, 0, 0 ],
+								"min" : 0,
+								"max" : 1,
+								"clamped" : true
+							},
+							"group" : "/Geometry/Lines",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
+								"id" : "Line Start Width",
+								"type" : "float",
+								"label" : "Line Start Width (mm)",
+								"value" : 0.1,
+								"min" : -10000,
+								"max" : 10000,
+								"step_size" : 0.01
+							},
+							"group" : "/Geometry/Lines",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
+								"id" : "Line End Width",
+								"type" : "float",
+								"label" : "Line End Width (mm)",
+								"value" : 0.1,
+								"min" : -10000,
+								"max" : 10000,
+								"step_size" : 0.01
+							},
+							"group" : "/Geometry/Lines",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
+								"id" : "Line UV Width",
+								"type" : "float",
+								"label" : "Line UV Width",
+								"value" : 0,
+								"min" : 0,
+								"max" : 1,
+								"step_size" : 0.01
+							},
+							"group" : "/Geometry/Lines",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
 						{
 							"channel" : {
 								"id" : "Base Mixing",
@@ -319,6 +411,22 @@
 								"step_size" : 1,
 								"default_image_gamma" : 0,
 								"mappable" : true
+							},
+							"group" : "/Base/Diffuse/Translucency",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.345098, 0.5019608, 0.6588235 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
+								"id" : "Invert Transmission Normal",
+								"type" : "bool",
+								"label" : "Invert Transmission Normal",
+								"value" : true
 							},
 							"group" : "/Base/Diffuse/Translucency",
 							"presentation" : {
@@ -2111,6 +2219,26 @@
 						},
 						{
 							"channel" : {
+								"id" : "Round Corners Roundness",
+								"type" : "float",
+								"label" : "Round Corners Roundness",
+								"value" : 1,
+								"min" : 0,
+								"max" : 1,
+								"clamped" : true,
+								"step_size" : 0.01
+							},
+							"group" : "/Geometry/Smoothing",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
 								"id" : "Roughness Squared",
 								"type" : "bool",
 								"label" : "Roughness Squared",
@@ -2133,6 +2261,24 @@
 								"label" : "Glossiness Squared",
 								"visible" : false,
 								"value" : true
+							},
+							"group" : "/Settings",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
+								"id" : "BSDF Type",
+								"type" : "enum",
+								"label" : "BSDF Type",
+								"visible" : false,
+								"value" : 0,
+								"enum_values" : [ "Standard Glossy", "Beckmann Smith", "GGX Smith", "Beckmann VCavities", "GGX VCavities", "Ward Geisler Moroder" ]
 							},
 							"group" : "/Settings",
 							"presentation" : {
@@ -2170,7 +2316,7 @@
 	"scene" : {
 		"materials" : [
 			{
-				"url" : "#Default",
+				"url" : "#OuterSphere",
 				"extra" : [
 					{
 						"type" : "studio/material/uber_iray",
@@ -2180,6 +2326,10 @@
 			}
 		],
 		"animations" : [
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Tags/value",
+				"keys" : [ [ 0, "Water" ] ]
+			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/OutlineColorID/value",
 				"keys" : [ [ 0, [ 0, 0, 0 ] ] ]
@@ -2554,7 +2704,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Translucency%20Color/value",
-				"keys" : [ [ 0, [ 1, 0, 0 ] ] ]
+				"keys" : [ [ 0, [ 1, 1, 1 ] ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Translucency%20Color/image",
@@ -2589,8 +2739,12 @@
 				"keys" : [ [ 0, 0 ] ]
 			},
 			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Invert%20Transmission%20Normal/value",
+				"keys" : [ [ 0, true ] ]
+			},
+			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/SSS%20Reflectance%20Tint/value",
-				"keys" : [ [ 0, [ 0, 1, 0 ] ] ]
+				"keys" : [ [ 0, [ 1, 1, 1 ] ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Dual%20Lobe%20Specular%20Weight/value",
@@ -4785,12 +4939,36 @@
 				"keys" : [ [ 0, 0 ] ]
 			},
 			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Round%20Corners%20Roundness/value",
+				"keys" : [ [ 0, 1 ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Line%20Preview%20Color/value",
+				"keys" : [ [ 0, [ 0, 0, 0 ] ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Line%20Start%20Width/value",
+				"keys" : [ [ 0, 0.1 ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Line%20End%20Width/value",
+				"keys" : [ [ 0, 0.1 ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Line%20UV%20Width/value",
+				"keys" : [ [ 0, 0 ] ]
+			},
+			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Roughness%20Squared/value",
 				"keys" : [ [ 0, true ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossiness%20Squared/value",
 				"keys" : [ [ 0, false ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/BSDF%20Type/value",
+				"keys" : [ [ 0, 0 ] ]
 			}
 		]
 	}
