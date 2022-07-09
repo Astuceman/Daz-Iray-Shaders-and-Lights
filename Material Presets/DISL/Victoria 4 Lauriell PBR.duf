@@ -1,7 +1,7 @@
 {
 	"file_version" : "0.6.0.0",
 	"asset_info" : {
-		"id" : "//TRUENAS/aquiniou/3D/Daz-Iray-Shaders-and-Lights/Material%20Presets/DISL/Victoria%204%20Lauriell%20PBR.duf",
+		"id" : "/Material%20Presets/DISL/Victoria%204%20Lauriell%20PBR.duf",
 		"type" : "preset_material",
 		"contributor" : {
 			"author" : "astuceman",
@@ -9,7 +9,7 @@
 			"website" : ""
 		},
 		"revision" : "1.0",
-		"modified" : "2022-03-30T17:48:09Z"
+		"modified" : "2022-07-09T16:41:10Z"
 	},
 	"image_library" : [
 		{
@@ -2205,6 +2205,7 @@
 								"visible" : false,
 								"value" : "",
 								"file_type" : "file_open",
+								"file_display_text" : "",
 								"file_filter" : "IES (*.ies)"
 							},
 							"group" : "/Emission",
@@ -4640,6 +4641,7 @@
 								"visible" : false,
 								"value" : "",
 								"file_type" : "file_open",
+								"file_display_text" : "",
 								"file_filter" : "IES (*.ies)"
 							},
 							"group" : "/Emission",
@@ -7081,6 +7083,7 @@
 								"visible" : false,
 								"value" : "",
 								"file_type" : "file_open",
+								"file_display_text" : "",
 								"file_filter" : "IES (*.ies)"
 							},
 							"group" : "/Emission",
