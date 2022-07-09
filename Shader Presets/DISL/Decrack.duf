@@ -18,7 +18,7 @@
 			"map_gamma" : 0,
 			"map" : [
 				{
-					"url" : "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack.png",
+					"url" : "/Runtime/Textures/DISL/Decrack.png",
 					"label" : "Decrack.png"
 				}
 			]
@@ -29,7 +29,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack%20BUMP2.png",
+					"url" : "/Runtime/Textures/DISL/Decrack%20BUMP2.png",
 					"label" : "Decrack BUMP2.png"
 				}
 			]
@@ -40,7 +40,7 @@
 			"map_gamma" : 1,
 			"map" : [
 				{
-					"url" : "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack%20NORMAL.png",
+					"url" : "/Runtime/Textures/DISL/Decrack%20NORMAL.png",
 					"label" : "Decrack NORMAL.png"
 				}
 			]
@@ -2337,7 +2337,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?diffuse/image_file",
-				"keys" : [ [ 0, "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Decrack.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?diffuse/image_modification/scale",
@@ -2981,7 +2981,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossy%20Layered%20Weight/image_file",
-				"keys" : [ [ 0, "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossy%20Layered%20Weight/image_modification/scale",
@@ -3065,7 +3065,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossy%20Reflectivity/image_file",
-				"keys" : [ [ 0, "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossy%20Reflectivity/image_modification/scale",
@@ -3141,7 +3141,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossy%20Roughness/image_file",
-				"keys" : [ [ 0, "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossy%20Roughness/image_modification/scale",
@@ -3741,7 +3741,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Bump%20Strength/image_file",
-				"keys" : [ [ 0, "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Bump%20Strength/image_modification/grayscale_mode",
@@ -3769,7 +3769,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Normal%20Map/image_file",
-				"keys" : [ [ 0, "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack%20NORMAL.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Decrack%20NORMAL.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Normal%20Map/image_modification/horizontal_tiles",
@@ -4045,7 +4045,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Weight/image_file",
-				"keys" : [ [ 0, "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Weight/image_modification/scale",
@@ -4125,7 +4125,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Roughness/image_file",
-				"keys" : [ [ 0, "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Roughness/image_modification/scale",
@@ -4209,7 +4209,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Reflectivity/image_file",
-				"keys" : [ [ 0, "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Reflectivity/image_modification/scale",
@@ -4573,7 +4573,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Bump/image_file",
-				"keys" : [ [ 0, "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Top%20Coat%20Bump/image_modification/grayscale_mode",
@@ -4801,7 +4801,7 @@
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_file",
-				"keys" : [ [ 0, "/Daz-Iray-Shaders-and-Lights/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
+				"keys" : [ [ 0, "/Runtime/Textures/DISL/Decrack%20BUMP2.png" ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Displacement%20Strength/image_modification/grayscale_mode",
