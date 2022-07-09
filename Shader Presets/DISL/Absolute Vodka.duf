@@ -1,19 +1,19 @@
 {
 	"file_version" : "0.6.0.0",
 	"asset_info" : {
-		"id" : "/Shaders/Absolute%20Vodka.duf",
+		"id" : "/Shader%20Presets/DISL/Absolute%20Vodka.duf",
 		"type" : "preset_shader",
 		"contributor" : {
-			"author" : "Astuceman",
+			"author" : "astuceman",
 			"email" : "",
-			"website" : "http://astuceman.blogspot.fr"
+			"website" : ""
 		},
 		"revision" : "1.0",
-		"modified" : "2018-05-17T23:40:37Z"
+		"modified" : "2022-07-09T10:27:09Z"
 	},
 	"material_library" : [
 		{
-			"id" : "Default",
+			"id" : "OuterSphere",
 			"diffuse" : {
 				"channel" : {
 					"id" : "diffuse",
@@ -53,6 +53,82 @@
 								"value" : ""
 							},
 							"group" : "/General",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
+								"id" : "Line Preview Color",
+								"type" : "color",
+								"label" : "Line Preview Color",
+								"value" : [ 0, 0, 0 ],
+								"min" : 0,
+								"max" : 1,
+								"clamped" : true
+							},
+							"group" : "/Geometry/Lines",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
+								"id" : "Line Start Width",
+								"type" : "float",
+								"label" : "Line Start Width (mm)",
+								"value" : 0.1,
+								"min" : -10000,
+								"max" : 10000,
+								"step_size" : 0.01
+							},
+							"group" : "/Geometry/Lines",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
+								"id" : "Line End Width",
+								"type" : "float",
+								"label" : "Line End Width (mm)",
+								"value" : 0.1,
+								"min" : -10000,
+								"max" : 10000,
+								"step_size" : 0.01
+							},
+							"group" : "/Geometry/Lines",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
+								"id" : "Line UV Width",
+								"type" : "float",
+								"label" : "Line UV Width",
+								"value" : 0,
+								"min" : 0,
+								"max" : 1,
+								"step_size" : 0.01
+							},
+							"group" : "/Geometry/Lines",
 							"presentation" : {
 								"type" : "",
 								"label" : "",
@@ -324,6 +400,23 @@
 								"step_size" : 1,
 								"default_image_gamma" : 0,
 								"mappable" : true
+							},
+							"group" : "/Base/Diffuse/Translucency",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.345098, 0.5019608, 0.6588235 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
+								"id" : "Invert Transmission Normal",
+								"type" : "bool",
+								"label" : "Invert Transmission Normal",
+								"visible" : false,
+								"value" : true
 							},
 							"group" : "/Base/Diffuse/Translucency",
 							"presentation" : {
@@ -1898,6 +1991,7 @@
 								"visible" : false,
 								"value" : "",
 								"file_type" : "file_open",
+								"file_display_text" : "",
 								"file_filter" : "IES (*.ies)"
 							},
 							"group" : "/Emission",
@@ -2132,6 +2226,26 @@
 						},
 						{
 							"channel" : {
+								"id" : "Round Corners Roundness",
+								"type" : "float",
+								"label" : "Round Corners Roundness",
+								"value" : 1,
+								"min" : 0,
+								"max" : 1,
+								"clamped" : true,
+								"step_size" : 0.01
+							},
+							"group" : "/Geometry/Smoothing",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
 								"id" : "Roughness Squared",
 								"type" : "bool",
 								"label" : "Roughness Squared",
@@ -2166,6 +2280,24 @@
 						},
 						{
 							"channel" : {
+								"id" : "BSDF Type",
+								"type" : "enum",
+								"label" : "BSDF Type",
+								"visible" : false,
+								"value" : 0,
+								"enum_values" : [ "Standard Glossy", "Beckmann Smith", "GGX Smith", "Beckmann VCavities", "GGX VCavities", "Ward Geisler Moroder" ]
+							},
+							"group" : "/Settings",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
 								"id" : "OutlineColorID",
 								"type" : "color",
 								"label" : "Material ID",
@@ -2173,6 +2305,22 @@
 								"min" : 0,
 								"max" : 1,
 								"clamped" : true
+							},
+							"group" : "/General",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
+						},
+						{
+							"channel" : {
+								"id" : "Exclude From White Mode",
+								"type" : "bool",
+								"label" : "Exclude From White Mode",
+								"value" : false
 							},
 							"group" : "/General",
 							"presentation" : {
@@ -2191,7 +2339,7 @@
 	"scene" : {
 		"materials" : [
 			{
-				"url" : "#Default",
+				"url" : "#OuterSphere",
 				"extra" : [
 					{
 						"type" : "studio/material/uber_iray",
@@ -2208,6 +2356,10 @@
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/OutlineColorID/value",
 				"keys" : [ [ 0, [ 0, 0, 0 ] ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Exclude%20From%20White%20Mode/value",
+				"keys" : [ [ 0, false ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Base%20Mixing/value",
@@ -2612,6 +2764,10 @@
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Translucency%20Color/image_modification/vertical_tiling_offset",
 				"keys" : [ [ 0, 0 ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Invert%20Transmission%20Normal/value",
+				"keys" : [ [ 0, true ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/SSS%20Reflectance%20Tint/value",
@@ -4810,12 +4966,36 @@
 				"keys" : [ [ 0, 0 ] ]
 			},
 			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Round%20Corners%20Roundness/value",
+				"keys" : [ [ 0, 1 ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Line%20Preview%20Color/value",
+				"keys" : [ [ 0, [ 0, 0, 0 ] ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Line%20Start%20Width/value",
+				"keys" : [ [ 0, 0.1 ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Line%20End%20Width/value",
+				"keys" : [ [ 0, 0.1 ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Line%20UV%20Width/value",
+				"keys" : [ [ 0, 0 ] ]
+			},
+			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Roughness%20Squared/value",
 				"keys" : [ [ 0, true ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Glossiness%20Squared/value",
 				"keys" : [ [ 0, false ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/BSDF%20Type/value",
+				"keys" : [ [ 0, 0 ] ]
 			}
 		]
 	}

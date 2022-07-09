@@ -9,7 +9,7 @@
 			"website" : ""
 		},
 		"revision" : "1.0",
-		"modified" : "2022-07-09T10:01:57Z"
+		"modified" : "2022-07-09T10:17:24Z"
 	},
 	"image_library" : [
 		{
@@ -26,7 +26,7 @@
 	],
 	"material_library" : [
 		{
-			"id" : "OuterSphere",
+			"id" : "Stand",
 			"diffuse" : {
 				"channel" : {
 					"id" : "diffuse",
@@ -1980,6 +1980,7 @@
 								"label" : "Emission Profile",
 								"value" : "",
 								"file_type" : "file_open",
+								"file_display_text" : "",
 								"file_filter" : "IES (*.ies)"
 							},
 							"group" : "/Emission",
@@ -2299,6 +2300,22 @@
 								"icon_large" : "",
 								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
 							}
+						},
+						{
+							"channel" : {
+								"id" : "Exclude From White Mode",
+								"type" : "bool",
+								"label" : "Exclude From White Mode",
+								"value" : false
+							},
+							"group" : "/General",
+							"presentation" : {
+								"type" : "",
+								"label" : "",
+								"description" : "",
+								"icon_large" : "",
+								"colors" : [ [ 0.5019608, 0.5019608, 0.5019608 ], [ 0.5019608, 0.5019608, 0.5019608 ] ]
+							}
 						}
 					]
 				}
@@ -2308,7 +2325,7 @@
 	"scene" : {
 		"materials" : [
 			{
-				"url" : "#OuterSphere",
+				"url" : "#Stand",
 				"extra" : [
 					{
 						"type" : "studio/material/uber_iray",
@@ -2321,6 +2338,10 @@
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/OutlineColorID/value",
 				"keys" : [ [ 0, [ 0, 0, 0 ] ] ]
+			},
+			{
+				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Exclude%20From%20White%20Mode/value",
+				"keys" : [ [ 0, false ] ]
 			},
 			{
 				"url" : "name://@selection#materials:?extra/studio_material_channels/channels/Base%20Mixing/value",
