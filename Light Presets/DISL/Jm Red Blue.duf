@@ -1,15 +1,15 @@
 {
 	"file_version" : "0.6.0.0",
 	"asset_info" : {
-		"id" : "/Lights/Jm%20Red%20Blue%20%5BDaz%20Light%20for%20Iray%5D.duf",
+		"id" : "/Light%20Presets/DISL/Jm%20Red%20Blue.duf",
 		"type" : "preset_light",
 		"contributor" : {
-			"author" : "Astuceman",
+			"author" : "astuceman",
 			"email" : "",
-			"website" : "http://astuceman.blogspot.fr"
+			"website" : ""
 		},
 		"revision" : "1.0",
-		"modified" : "2018-05-17T23:03:12Z"
+		"modified" : "2022-07-09T15:19:53Z"
 	},
 	"node_library" : [
 		{
@@ -271,7 +271,30 @@
 			"extra" : [
 				{
 					"type" : "studio_node_channels",
+					"version" : 4,
 					"channels" : [
+						{
+							"channel" : {
+								"id" : "Disable Transform",
+								"type" : "bool",
+								"label" : "Disable Local Transform",
+								"visible" : false,
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/General/Transforms"
+						},
+						{
+							"channel" : {
+								"id" : "Ignore Local Transform",
+								"type" : "bool",
+								"label" : "Ignore Local Transform",
+								"visible" : false,
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/General/Transforms"
+						},
 						{
 							"channel" : {
 								"id" : "Point At",
@@ -286,18 +309,37 @@
 								"needs_node" : true,
 								"node" : null
 							},
-							"group" : "/General/Misc"
+							"group" : "/General/Constraints"
 						},
 						{
 							"channel" : {
-								"id" : "Disable Transform",
+								"id" : "Visible",
 								"type" : "bool",
-								"label" : "Disable Transform",
-								"visible" : false,
-								"value" : false,
-								"current_value" : false
+								"label" : "Visible",
+								"value" : true,
+								"current_value" : true
 							},
-							"group" : "/General/Misc"
+							"group" : "/Display"
+						},
+						{
+							"channel" : {
+								"id" : "Visible in Viewport",
+								"type" : "bool",
+								"label" : "Visible in Viewport",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View"
+						},
+						{
+							"channel" : {
+								"id" : "Selectable",
+								"type" : "bool",
+								"label" : "Selectable (in Viewport)",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View"
 						},
 						{
 							"channel" : {
@@ -343,26 +385,6 @@
 						},
 						{
 							"channel" : {
-								"id" : "Visible",
-								"type" : "bool",
-								"label" : "Visible",
-								"value" : true,
-								"current_value" : true
-							},
-							"group" : "/Display/Scene View"
-						},
-						{
-							"channel" : {
-								"id" : "Selectable",
-								"type" : "bool",
-								"label" : "Selectable",
-								"value" : true,
-								"current_value" : true
-							},
-							"group" : "/Display/Scene View"
-						},
-						{
-							"channel" : {
 								"id" : "Categories",
 								"type" : "string",
 								"label" : "Categories",
@@ -380,7 +402,7 @@
 								"current_value" : 0,
 								"enum_values" : [ "None", "Deep Shadow Map", "Raytraced (Software Only)" ]
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -549,7 +571,7 @@
 								"max" : 1,
 								"clamped" : true
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -564,7 +586,7 @@
 								"display_as_percent" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -580,7 +602,7 @@
 								"display_as_percent" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -594,7 +616,7 @@
 								"clamped" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -618,6 +640,7 @@
 								"value" : "",
 								"current_value" : "",
 								"file_type" : "file_open",
+								"file_display_text" : "",
 								"file_filter" : "IES (*.ies)"
 							},
 							"group" : "/Light/Photometrics"
@@ -912,7 +935,30 @@
 			"extra" : [
 				{
 					"type" : "studio_node_channels",
+					"version" : 4,
 					"channels" : [
+						{
+							"channel" : {
+								"id" : "Disable Transform",
+								"type" : "bool",
+								"label" : "Disable Local Transform",
+								"visible" : false,
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/General/Transforms"
+						},
+						{
+							"channel" : {
+								"id" : "Ignore Local Transform",
+								"type" : "bool",
+								"label" : "Ignore Local Transform",
+								"visible" : false,
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/General/Transforms"
+						},
 						{
 							"channel" : {
 								"id" : "Point At",
@@ -927,18 +973,37 @@
 								"needs_node" : true,
 								"node" : null
 							},
-							"group" : "/General/Misc"
+							"group" : "/General/Constraints"
 						},
 						{
 							"channel" : {
-								"id" : "Disable Transform",
+								"id" : "Visible",
 								"type" : "bool",
-								"label" : "Disable Transform",
-								"visible" : false,
-								"value" : false,
-								"current_value" : false
+								"label" : "Visible",
+								"value" : true,
+								"current_value" : true
 							},
-							"group" : "/General/Misc"
+							"group" : "/Display"
+						},
+						{
+							"channel" : {
+								"id" : "Visible in Viewport",
+								"type" : "bool",
+								"label" : "Visible in Viewport",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View"
+						},
+						{
+							"channel" : {
+								"id" : "Selectable",
+								"type" : "bool",
+								"label" : "Selectable (in Viewport)",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View"
 						},
 						{
 							"channel" : {
@@ -984,26 +1049,6 @@
 						},
 						{
 							"channel" : {
-								"id" : "Visible",
-								"type" : "bool",
-								"label" : "Visible",
-								"value" : true,
-								"current_value" : true
-							},
-							"group" : "/Display/Scene View"
-						},
-						{
-							"channel" : {
-								"id" : "Selectable",
-								"type" : "bool",
-								"label" : "Selectable",
-								"value" : true,
-								"current_value" : true
-							},
-							"group" : "/Display/Scene View"
-						},
-						{
-							"channel" : {
 								"id" : "Categories",
 								"type" : "string",
 								"label" : "Categories",
@@ -1021,7 +1066,7 @@
 								"current_value" : 0,
 								"enum_values" : [ "None", "Deep Shadow Map", "Raytraced (Software Only)" ]
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1190,7 +1235,7 @@
 								"max" : 1,
 								"clamped" : true
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1205,7 +1250,7 @@
 								"display_as_percent" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1221,7 +1266,7 @@
 								"display_as_percent" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1235,7 +1280,7 @@
 								"clamped" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1259,6 +1304,7 @@
 								"value" : "",
 								"current_value" : "",
 								"file_type" : "file_open",
+								"file_display_text" : "",
 								"file_filter" : "IES (*.ies)"
 							},
 							"group" : "/Light/Photometrics"
@@ -1555,7 +1601,30 @@
 			"extra" : [
 				{
 					"type" : "studio_node_channels",
+					"version" : 4,
 					"channels" : [
+						{
+							"channel" : {
+								"id" : "Disable Transform",
+								"type" : "bool",
+								"label" : "Disable Local Transform",
+								"visible" : false,
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/General/Transforms"
+						},
+						{
+							"channel" : {
+								"id" : "Ignore Local Transform",
+								"type" : "bool",
+								"label" : "Ignore Local Transform",
+								"visible" : false,
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/General/Transforms"
+						},
 						{
 							"channel" : {
 								"id" : "Point At",
@@ -1570,18 +1639,37 @@
 								"needs_node" : true,
 								"node" : null
 							},
-							"group" : "/General/Misc"
+							"group" : "/General/Constraints"
 						},
 						{
 							"channel" : {
-								"id" : "Disable Transform",
+								"id" : "Visible",
 								"type" : "bool",
-								"label" : "Disable Transform",
-								"visible" : false,
-								"value" : false,
-								"current_value" : false
+								"label" : "Visible",
+								"value" : true,
+								"current_value" : true
 							},
-							"group" : "/General/Misc"
+							"group" : "/Display"
+						},
+						{
+							"channel" : {
+								"id" : "Visible in Viewport",
+								"type" : "bool",
+								"label" : "Visible in Viewport",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View"
+						},
+						{
+							"channel" : {
+								"id" : "Selectable",
+								"type" : "bool",
+								"label" : "Selectable (in Viewport)",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View"
 						},
 						{
 							"channel" : {
@@ -1627,26 +1715,6 @@
 						},
 						{
 							"channel" : {
-								"id" : "Visible",
-								"type" : "bool",
-								"label" : "Visible",
-								"value" : true,
-								"current_value" : true
-							},
-							"group" : "/Display/Scene View"
-						},
-						{
-							"channel" : {
-								"id" : "Selectable",
-								"type" : "bool",
-								"label" : "Selectable",
-								"value" : true,
-								"current_value" : true
-							},
-							"group" : "/Display/Scene View"
-						},
-						{
-							"channel" : {
 								"id" : "Categories",
 								"type" : "string",
 								"label" : "Categories",
@@ -1664,7 +1732,7 @@
 								"current_value" : 0,
 								"enum_values" : [ "None", "Deep Shadow Map", "Raytraced (Software Only)" ]
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1833,7 +1901,7 @@
 								"max" : 1,
 								"clamped" : true
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1848,7 +1916,7 @@
 								"display_as_percent" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1863,7 +1931,7 @@
 								"display_as_percent" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1877,7 +1945,7 @@
 								"clamped" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -2050,19 +2118,37 @@
 				"id" : "PointLight 2-1",
 				"url" : "#PointLight%202",
 				"name" : "PointLight 2",
-				"label" : "PointLight 2"
+				"label" : "PointLight 2",
+				"extra" : [
+					{
+						"type" : "studio_node_channels",
+						"version" : 4
+					}
+				]
 			},
 			{
 				"id" : "PointLight 1-1",
 				"url" : "#PointLight%201",
 				"name" : "PointLight 1",
-				"label" : "PointLight 1"
+				"label" : "PointLight 1",
+				"extra" : [
+					{
+						"type" : "studio_node_channels",
+						"version" : 4
+					}
+				]
 			},
 			{
 				"id" : "SpotLight 1-1",
 				"url" : "#SpotLight%201",
 				"name" : "SpotLight 1",
-				"label" : "SpotLight 1"
+				"label" : "SpotLight 1",
+				"extra" : [
+					{
+						"type" : "studio_node_channels",
+						"version" : 4
+					}
+				]
 			}
 		]
 	}

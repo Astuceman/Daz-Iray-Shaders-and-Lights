@@ -1,15 +1,15 @@
 {
 	"file_version" : "0.6.0.0",
 	"asset_info" : {
-		"id" : "/Lights/Studio%20Lights%20%5BDaz%20Light%20for%20Iray%5D.duf",
+		"id" : "/Light%20Presets/DISL/Clamshell.duf",
 		"type" : "preset_light",
 		"contributor" : {
-			"author" : "Astuceman",
+			"author" : "astuceman",
 			"email" : "",
-			"website" : "http://astuceman.blogspot.fr"
+			"website" : ""
 		},
 		"revision" : "1.0",
-		"modified" : "2018-05-17T23:07:08Z"
+		"modified" : "2022-07-09T15:19:09Z"
 	},
 	"node_library" : [
 		{
@@ -19,7 +19,7 @@
 			"label" : "PointLight 2",
 			"rotation_order" : "XYZ",
 			"inherits_scale" : true,
-			"color" : [ 0.5254902, 0.7333333, 1 ],
+			"color" : [ 1, 1, 1 ],
 			"point" : {
 				"intensity" : 1,
 				"shadow_type" : "none",
@@ -148,7 +148,7 @@
 					"name" : "XRotate",
 					"label" : "X Rotate",
 					"value" : 0,
-					"current_value" : 0,
+					"current_value" : -333.6309,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 0.5
@@ -159,7 +159,7 @@
 					"name" : "YRotate",
 					"label" : "Y Rotate",
 					"value" : 0,
-					"current_value" : 90,
+					"current_value" : 189.4341,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 0.5
@@ -170,7 +170,7 @@
 					"name" : "ZRotate",
 					"label" : "Z Rotate",
 					"value" : 0,
-					"current_value" : 0,
+					"current_value" : 345.0288,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 0.5
@@ -183,7 +183,7 @@
 					"name" : "XTranslate",
 					"label" : "X Translate",
 					"value" : 0,
-					"current_value" : 155,
+					"current_value" : 24.20616,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 1
@@ -194,7 +194,7 @@
 					"name" : "YTranslate",
 					"label" : "Y Translate",
 					"value" : 0,
-					"current_value" : 130,
+					"current_value" : 264.3536,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 1
@@ -205,7 +205,7 @@
 					"name" : "ZTranslate",
 					"label" : "Z Translate",
 					"value" : 0,
-					"current_value" : -25,
+					"current_value" : 173.043,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 1
@@ -271,7 +271,30 @@
 			"extra" : [
 				{
 					"type" : "studio_node_channels",
+					"version" : 4,
 					"channels" : [
+						{
+							"channel" : {
+								"id" : "Disable Transform",
+								"type" : "bool",
+								"label" : "Disable Local Transform",
+								"visible" : false,
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/General/Transforms"
+						},
+						{
+							"channel" : {
+								"id" : "Ignore Local Transform",
+								"type" : "bool",
+								"label" : "Ignore Local Transform",
+								"visible" : false,
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/General/Transforms"
+						},
 						{
 							"channel" : {
 								"id" : "Point At",
@@ -286,18 +309,37 @@
 								"needs_node" : true,
 								"node" : null
 							},
-							"group" : "/General/Misc"
+							"group" : "/General/Constraints"
 						},
 						{
 							"channel" : {
-								"id" : "Disable Transform",
+								"id" : "Visible",
 								"type" : "bool",
-								"label" : "Disable Transform",
-								"visible" : false,
-								"value" : false,
-								"current_value" : false
+								"label" : "Visible",
+								"value" : true,
+								"current_value" : true
 							},
-							"group" : "/General/Misc"
+							"group" : "/Display"
+						},
+						{
+							"channel" : {
+								"id" : "Visible in Viewport",
+								"type" : "bool",
+								"label" : "Visible in Viewport",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View"
+						},
+						{
+							"channel" : {
+								"id" : "Selectable",
+								"type" : "bool",
+								"label" : "Selectable (in Viewport)",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View"
 						},
 						{
 							"channel" : {
@@ -337,29 +379,9 @@
 								"type" : "bool",
 								"label" : "Visible in Simulation",
 								"value" : true,
-								"current_value" : true
+								"current_value" : false
 							},
 							"group" : "/Display/Simulation"
-						},
-						{
-							"channel" : {
-								"id" : "Visible",
-								"type" : "bool",
-								"label" : "Visible",
-								"value" : true,
-								"current_value" : true
-							},
-							"group" : "/Display/Scene View"
-						},
-						{
-							"channel" : {
-								"id" : "Selectable",
-								"type" : "bool",
-								"label" : "Selectable",
-								"value" : true,
-								"current_value" : true
-							},
-							"group" : "/Display/Scene View"
 						},
 						{
 							"channel" : {
@@ -380,7 +402,7 @@
 								"current_value" : 0,
 								"enum_values" : [ "None", "Deep Shadow Map", "Raytraced (Software Only)" ]
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -399,7 +421,7 @@
 								"type" : "color",
 								"label" : "Color",
 								"value" : [ 1, 1, 1 ],
-								"current_value" : [ 0.5254902, 0.7333333, 1 ],
+								"current_value" : [ 1, 1, 1 ],
 								"min" : 0,
 								"max" : 1,
 								"clamped" : true
@@ -427,7 +449,7 @@
 								"type" : "float",
 								"label" : "Intensity Scale",
 								"value" : 1000,
-								"current_value" : 1000,
+								"current_value" : 1,
 								"min" : 0,
 								"max" : 10000,
 								"step_size" : 100
@@ -450,7 +472,7 @@
 								"type" : "enum",
 								"label" : "Light Geometry",
 								"value" : 0,
-								"current_value" : 1,
+								"current_value" : 3,
 								"enum_values" : [ "Point", "Rectangle", "Disc", "Sphere", "Cylinder" ]
 							},
 							"group" : "/Light/Area"
@@ -461,7 +483,7 @@
 								"type" : "float",
 								"label" : "Height (Diameter)",
 								"value" : 10,
-								"current_value" : 150,
+								"current_value" : 70,
 								"min" : -10000,
 								"max" : 10000,
 								"step_size" : 0.1
@@ -474,7 +496,7 @@
 								"type" : "float",
 								"label" : "Width",
 								"value" : 10,
-								"current_value" : 150,
+								"current_value" : 10,
 								"min" : -10000,
 								"max" : 10000,
 								"step_size" : 0.1
@@ -517,7 +539,7 @@
 								"type" : "float",
 								"label" : "Luminous Flux (Lumen)",
 								"value" : 1500,
-								"current_value" : 550000,
+								"current_value" : 2600000,
 								"min" : -10000,
 								"max" : 10000,
 								"step_size" : 100
@@ -530,7 +552,7 @@
 								"type" : "float",
 								"label" : "Temperature (K)",
 								"value" : 6500,
-								"current_value" : 6500,
+								"current_value" : 7333.333,
 								"min" : 0,
 								"max" : 10000,
 								"clamped" : true,
@@ -549,7 +571,7 @@
 								"max" : 1,
 								"clamped" : true
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -564,7 +586,7 @@
 								"display_as_percent" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -580,7 +602,7 @@
 								"display_as_percent" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -594,7 +616,7 @@
 								"clamped" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -602,7 +624,7 @@
 								"type" : "float",
 								"label" : "Decay",
 								"value" : 2,
-								"current_value" : 2,
+								"current_value" : 0,
 								"min" : 0,
 								"max" : 2,
 								"clamped" : true,
@@ -618,6 +640,7 @@
 								"value" : "",
 								"current_value" : "",
 								"file_type" : "file_open",
+								"file_display_text" : "",
 								"file_filter" : "IES (*.ies)"
 							},
 							"group" : "/Light/Photometrics"
@@ -654,10 +677,10 @@
 			]
 		},
 		{
-			"id" : "PointLight 1",
-			"name" : "PointLight 1",
+			"id" : "PointLight 3",
+			"name" : "PointLight 3",
 			"type" : "light",
-			"label" : "PointLight 1",
+			"label" : "PointLight 3",
 			"rotation_order" : "XYZ",
 			"inherits_scale" : true,
 			"color" : [ 1, 1, 1 ],
@@ -789,7 +812,7 @@
 					"name" : "XRotate",
 					"label" : "X Rotate",
 					"value" : 0,
-					"current_value" : -45,
+					"current_value" : 50.42444,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 0.5
@@ -800,7 +823,7 @@
 					"name" : "YRotate",
 					"label" : "Y Rotate",
 					"value" : 0,
-					"current_value" : -50,
+					"current_value" : -0.6603706,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 0.5
@@ -811,7 +834,7 @@
 					"name" : "ZRotate",
 					"label" : "Z Rotate",
 					"value" : 0,
-					"current_value" : 0,
+					"current_value" : -2.77489,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 0.5
@@ -824,7 +847,7 @@
 					"name" : "XTranslate",
 					"label" : "X Translate",
 					"value" : 0,
-					"current_value" : -80,
+					"current_value" : -10.64953,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 1
@@ -835,7 +858,7 @@
 					"name" : "YTranslate",
 					"label" : "Y Translate",
 					"value" : 0,
-					"current_value" : 200,
+					"current_value" : 66.5217,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 1
@@ -846,7 +869,7 @@
 					"name" : "ZTranslate",
 					"label" : "Z Translate",
 					"value" : 0,
-					"current_value" : 60,
+					"current_value" : 162.0409,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 1
@@ -912,7 +935,30 @@
 			"extra" : [
 				{
 					"type" : "studio_node_channels",
+					"version" : 4,
 					"channels" : [
+						{
+							"channel" : {
+								"id" : "Disable Transform",
+								"type" : "bool",
+								"label" : "Disable Local Transform",
+								"visible" : false,
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/General/Transforms"
+						},
+						{
+							"channel" : {
+								"id" : "Ignore Local Transform",
+								"type" : "bool",
+								"label" : "Ignore Local Transform",
+								"visible" : false,
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/General/Transforms"
+						},
 						{
 							"channel" : {
 								"id" : "Point At",
@@ -927,18 +973,37 @@
 								"needs_node" : true,
 								"node" : null
 							},
-							"group" : "/General/Misc"
+							"group" : "/General/Constraints"
 						},
 						{
 							"channel" : {
-								"id" : "Disable Transform",
+								"id" : "Visible",
 								"type" : "bool",
-								"label" : "Disable Transform",
-								"visible" : false,
-								"value" : false,
-								"current_value" : false
+								"label" : "Visible",
+								"value" : true,
+								"current_value" : true
 							},
-							"group" : "/General/Misc"
+							"group" : "/Display"
+						},
+						{
+							"channel" : {
+								"id" : "Visible in Viewport",
+								"type" : "bool",
+								"label" : "Visible in Viewport",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View"
+						},
+						{
+							"channel" : {
+								"id" : "Selectable",
+								"type" : "bool",
+								"label" : "Selectable (in Viewport)",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View"
 						},
 						{
 							"channel" : {
@@ -984,26 +1049,6 @@
 						},
 						{
 							"channel" : {
-								"id" : "Visible",
-								"type" : "bool",
-								"label" : "Visible",
-								"value" : true,
-								"current_value" : true
-							},
-							"group" : "/Display/Scene View"
-						},
-						{
-							"channel" : {
-								"id" : "Selectable",
-								"type" : "bool",
-								"label" : "Selectable",
-								"value" : true,
-								"current_value" : true
-							},
-							"group" : "/Display/Scene View"
-						},
-						{
-							"channel" : {
 								"id" : "Categories",
 								"type" : "string",
 								"label" : "Categories",
@@ -1021,7 +1066,7 @@
 								"current_value" : 0,
 								"enum_values" : [ "None", "Deep Shadow Map", "Raytraced (Software Only)" ]
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1068,7 +1113,7 @@
 								"type" : "float",
 								"label" : "Intensity Scale",
 								"value" : 1000,
-								"current_value" : 1000,
+								"current_value" : 1,
 								"min" : 0,
 								"max" : 10000,
 								"step_size" : 100
@@ -1102,7 +1147,7 @@
 								"type" : "float",
 								"label" : "Height (Diameter)",
 								"value" : 10,
-								"current_value" : 64,
+								"current_value" : 150,
 								"min" : -10000,
 								"max" : 10000,
 								"step_size" : 0.1
@@ -1115,7 +1160,7 @@
 								"type" : "float",
 								"label" : "Width",
 								"value" : 10,
-								"current_value" : 64,
+								"current_value" : 150,
 								"min" : -10000,
 								"max" : 10000,
 								"step_size" : 0.1
@@ -1158,7 +1203,7 @@
 								"type" : "float",
 								"label" : "Luminous Flux (Lumen)",
 								"value" : 1500,
-								"current_value" : 350000,
+								"current_value" : 240000,
 								"min" : -10000,
 								"max" : 10000,
 								"step_size" : 100
@@ -1171,7 +1216,7 @@
 								"type" : "float",
 								"label" : "Temperature (K)",
 								"value" : 6500,
-								"current_value" : 6500,
+								"current_value" : 4504.504,
 								"min" : 0,
 								"max" : 10000,
 								"clamped" : true,
@@ -1190,7 +1235,7 @@
 								"max" : 1,
 								"clamped" : true
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1205,7 +1250,7 @@
 								"display_as_percent" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1221,7 +1266,7 @@
 								"display_as_percent" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1235,7 +1280,7 @@
 								"clamped" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1243,7 +1288,7 @@
 								"type" : "float",
 								"label" : "Decay",
 								"value" : 2,
-								"current_value" : 2,
+								"current_value" : 0,
 								"min" : 0,
 								"max" : 2,
 								"clamped" : true,
@@ -1259,6 +1304,7 @@
 								"value" : "",
 								"current_value" : "",
 								"file_type" : "file_open",
+								"file_display_text" : "",
 								"file_filter" : "IES (*.ies)"
 							},
 							"group" : "/Light/Photometrics"
@@ -1295,18 +1341,20 @@
 			]
 		},
 		{
-			"id" : "DistantLight 1",
-			"name" : "DistantLight 1",
+			"id" : "SpotLight 1",
+			"name" : "SpotLight 1",
 			"type" : "light",
-			"label" : "DistantLight 1",
+			"label" : "SpotLight 1",
 			"rotation_order" : "XYZ",
 			"inherits_scale" : true,
 			"color" : [ 1, 1, 1 ],
-			"directional" : {
+			"spot" : {
 				"intensity" : 1,
 				"shadow_type" : "none",
 				"shadow_softness" : 0,
-				"shadow_bias" : 1
+				"shadow_bias" : 1,
+				"falloff_angle" : 42.16217,
+				"falloff_exponent" : 8.932798
 			},
 			"on" : true,
 			"center_point" : [
@@ -1430,7 +1478,7 @@
 					"name" : "XRotate",
 					"label" : "X Rotate",
 					"value" : 0,
-					"current_value" : 0,
+					"current_value" : 334.5144,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 0.5
@@ -1441,7 +1489,7 @@
 					"name" : "YRotate",
 					"label" : "Y Rotate",
 					"value" : 0,
-					"current_value" : 0,
+					"current_value" : -170.3241,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 0.5
@@ -1452,7 +1500,7 @@
 					"name" : "ZRotate",
 					"label" : "Z Rotate",
 					"value" : 0,
-					"current_value" : 0,
+					"current_value" : -355.5263,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 0.5
@@ -1465,7 +1513,7 @@
 					"name" : "XTranslate",
 					"label" : "X Translate",
 					"value" : 0,
-					"current_value" : 0,
+					"current_value" : -21.38256,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 1
@@ -1476,7 +1524,7 @@
 					"name" : "YTranslate",
 					"label" : "Y Translate",
 					"value" : 0,
-					"current_value" : 0,
+					"current_value" : 188.1563,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 1
@@ -1487,7 +1535,7 @@
 					"name" : "ZTranslate",
 					"label" : "Z Translate",
 					"value" : 0,
-					"current_value" : 0,
+					"current_value" : -99.88484,
 					"min" : -10000,
 					"max" : 10000,
 					"step_size" : 1
@@ -1553,7 +1601,30 @@
 			"extra" : [
 				{
 					"type" : "studio_node_channels",
+					"version" : 4,
 					"channels" : [
+						{
+							"channel" : {
+								"id" : "Disable Transform",
+								"type" : "bool",
+								"label" : "Disable Local Transform",
+								"visible" : false,
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/General/Transforms"
+						},
+						{
+							"channel" : {
+								"id" : "Ignore Local Transform",
+								"type" : "bool",
+								"label" : "Ignore Local Transform",
+								"visible" : false,
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/General/Transforms"
+						},
 						{
 							"channel" : {
 								"id" : "Point At",
@@ -1568,18 +1639,37 @@
 								"needs_node" : true,
 								"node" : null
 							},
-							"group" : "/General/Misc"
+							"group" : "/General/Constraints"
 						},
 						{
 							"channel" : {
-								"id" : "Disable Transform",
+								"id" : "Visible",
 								"type" : "bool",
-								"label" : "Disable Transform",
-								"visible" : false,
-								"value" : false,
-								"current_value" : false
+								"label" : "Visible",
+								"value" : true,
+								"current_value" : true
 							},
-							"group" : "/General/Misc"
+							"group" : "/Display"
+						},
+						{
+							"channel" : {
+								"id" : "Visible in Viewport",
+								"type" : "bool",
+								"label" : "Visible in Viewport",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View"
+						},
+						{
+							"channel" : {
+								"id" : "Selectable",
+								"type" : "bool",
+								"label" : "Selectable (in Viewport)",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View"
 						},
 						{
 							"channel" : {
@@ -1625,26 +1715,6 @@
 						},
 						{
 							"channel" : {
-								"id" : "Visible",
-								"type" : "bool",
-								"label" : "Visible",
-								"value" : true,
-								"current_value" : true
-							},
-							"group" : "/Display/Scene View"
-						},
-						{
-							"channel" : {
-								"id" : "Selectable",
-								"type" : "bool",
-								"label" : "Selectable",
-								"value" : true,
-								"current_value" : true
-							},
-							"group" : "/Display/Scene View"
-						},
-						{
-							"channel" : {
 								"id" : "Categories",
 								"type" : "string",
 								"label" : "Categories",
@@ -1662,7 +1732,7 @@
 								"current_value" : 0,
 								"enum_values" : [ "None", "Deep Shadow Map", "Raytraced (Software Only)" ]
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1731,9 +1801,8 @@
 								"id" : "Light Geometry",
 								"type" : "enum",
 								"label" : "Light Geometry",
-								"visible" : false,
 								"value" : 0,
-								"current_value" : 0,
+								"current_value" : 2,
 								"enum_values" : [ "Point", "Rectangle", "Disc", "Sphere", "Cylinder" ]
 							},
 							"group" : "/Light/Area"
@@ -1743,9 +1812,8 @@
 								"id" : "Height",
 								"type" : "float",
 								"label" : "Height (Diameter)",
-								"visible" : false,
 								"value" : 10,
-								"current_value" : 10,
+								"current_value" : 30,
 								"min" : -10000,
 								"max" : 10000,
 								"step_size" : 0.1
@@ -1757,7 +1825,6 @@
 								"id" : "Width",
 								"type" : "float",
 								"label" : "Width",
-								"visible" : false,
 								"value" : 10,
 								"current_value" : 10,
 								"min" : -10000,
@@ -1771,7 +1838,6 @@
 								"id" : "Light Portal",
 								"type" : "bool",
 								"label" : "Light Portal",
-								"visible" : false,
 								"value" : false,
 								"current_value" : false
 							},
@@ -1782,7 +1848,6 @@
 								"id" : "Two Sided",
 								"type" : "bool",
 								"label" : "Two Sided",
-								"visible" : false,
 								"value" : false,
 								"current_value" : false
 							},
@@ -1793,7 +1858,6 @@
 								"id" : "Render Emitter",
 								"type" : "bool",
 								"label" : "Render Emitter",
-								"visible" : false,
 								"value" : true,
 								"current_value" : true
 							},
@@ -1805,7 +1869,7 @@
 								"type" : "float",
 								"label" : "Luminous Flux (Lumen)",
 								"value" : 1500,
-								"current_value" : 1500,
+								"current_value" : 300000,
 								"min" : -10000,
 								"max" : 10000,
 								"step_size" : 100
@@ -1818,7 +1882,7 @@
 								"type" : "float",
 								"label" : "Temperature (K)",
 								"value" : 6500,
-								"current_value" : 6500,
+								"current_value" : 7333.333,
 								"min" : 0,
 								"max" : 10000,
 								"clamped" : true,
@@ -1837,7 +1901,7 @@
 								"max" : 1,
 								"clamped" : true
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1852,7 +1916,7 @@
 								"display_as_percent" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1867,7 +1931,7 @@
 								"display_as_percent" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
 						},
 						{
 							"channel" : {
@@ -1881,7 +1945,167 @@
 								"clamped" : true,
 								"step_size" : 0.01
 							},
-							"group" : "/Light/Shadow"
+							"group" : "/Light/Shadow/Biased Render"
+						},
+						{
+							"channel" : {
+								"id" : "Spread Angle",
+								"type" : "float",
+								"label" : "Spread Angle",
+								"value" : 60,
+								"current_value" : 84.32433,
+								"min" : 0,
+								"max" : 180,
+								"clamped" : true,
+								"step_size" : 0.01
+							},
+							"group" : "/Light"
+						},
+						{
+							"channel" : {
+								"id" : "Beam Distribution",
+								"type" : "float",
+								"label" : "Beam Distribution",
+								"value" : 2,
+								"current_value" : 2,
+								"min" : 0,
+								"max" : 2,
+								"clamped" : true,
+								"step_size" : 0.5
+							},
+							"group" : "/Light"
+						},
+						{
+							"channel" : {
+								"id" : "Beam Exponent",
+								"type" : "float",
+								"label" : "Beam Exponent",
+								"value" : 4,
+								"current_value" : 4,
+								"min" : 1,
+								"max" : 100,
+								"clamped" : true,
+								"step_size" : 0.01
+							},
+							"group" : "/Light"
+						},
+						{
+							"channel" : {
+								"id" : "Decay",
+								"type" : "float",
+								"label" : "Decay",
+								"value" : 0,
+								"current_value" : 0,
+								"min" : 0,
+								"max" : 2,
+								"clamped" : true,
+								"step_size" : 0.5
+							},
+							"group" : "/Light"
+						},
+						{
+							"channel" : {
+								"id" : "Display Persistence",
+								"type" : "bool",
+								"label" : "Display Persistence",
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/Display/Scene View/Misc"
+						},
+						{
+							"channel" : {
+								"id" : "Ray Length",
+								"type" : "float",
+								"label" : "Ray Length",
+								"value" : 2.5,
+								"current_value" : 2.5,
+								"min" : 0,
+								"max" : 100,
+								"clamped" : true,
+								"step_size" : 0.5
+							},
+							"group" : "/Display/Scene View/Light Cone"
+						},
+						{
+							"channel" : {
+								"id" : "Opacity Scale",
+								"type" : "float",
+								"label" : "Opacity Scale",
+								"value" : 1,
+								"current_value" : 1,
+								"min" : 0,
+								"max" : 2,
+								"clamped" : true,
+								"display_as_percent" : true,
+								"step_size" : 0.01
+							},
+							"group" : "/Display/Scene View/Light Cone"
+						},
+						{
+							"channel" : {
+								"id" : "Ray Opacity",
+								"type" : "float",
+								"label" : "Ray Opacity",
+								"value" : 0.15,
+								"current_value" : 0.15,
+								"min" : 0,
+								"max" : 1,
+								"clamped" : true,
+								"display_as_percent" : true,
+								"step_size" : 0.01
+							},
+							"group" : "/Display/Scene View/Light Cone"
+						},
+						{
+							"channel" : {
+								"id" : "Show Base",
+								"type" : "bool",
+								"label" : "Show Base",
+								"value" : false,
+								"current_value" : false
+							},
+							"group" : "/Display/Scene View/Light Base"
+						},
+						{
+							"channel" : {
+								"id" : "Base Opacity",
+								"type" : "float",
+								"label" : "Base Opacity",
+								"value" : 0.15,
+								"current_value" : 0.15,
+								"min" : 0,
+								"max" : 1,
+								"clamped" : true,
+								"display_as_percent" : true,
+								"step_size" : 0.01
+							},
+							"group" : "/Display/Scene View/Light Base"
+						},
+						{
+							"channel" : {
+								"id" : "Show Edge",
+								"type" : "bool",
+								"label" : "Show Edge",
+								"value" : true,
+								"current_value" : true
+							},
+							"group" : "/Display/Scene View/Light Base"
+						},
+						{
+							"channel" : {
+								"id" : "Edge Opacity",
+								"type" : "float",
+								"label" : "Edge Opacity",
+								"value" : 0.2,
+								"current_value" : 0.2,
+								"min" : 0,
+								"max" : 1,
+								"clamped" : true,
+								"display_as_percent" : true,
+								"step_size" : 0.01
+							},
+							"group" : "/Display/Scene View/Light Base"
 						}
 					]
 				}
@@ -1894,19 +2118,37 @@
 				"id" : "PointLight 2-1",
 				"url" : "#PointLight%202",
 				"name" : "PointLight 2",
-				"label" : "PointLight 2"
+				"label" : "PointLight 2",
+				"extra" : [
+					{
+						"type" : "studio_node_channels",
+						"version" : 4
+					}
+				]
 			},
 			{
-				"id" : "PointLight 1-1",
-				"url" : "#PointLight%201",
-				"name" : "PointLight 1",
-				"label" : "PointLight 1"
+				"id" : "PointLight 3-1",
+				"url" : "#PointLight%203",
+				"name" : "PointLight 3",
+				"label" : "PointLight 3",
+				"extra" : [
+					{
+						"type" : "studio_node_channels",
+						"version" : 4
+					}
+				]
 			},
 			{
-				"id" : "DistantLight 1-1",
-				"url" : "#DistantLight%201",
-				"name" : "DistantLight 1",
-				"label" : "DistantLight 1"
+				"id" : "SpotLight 1-1",
+				"url" : "#SpotLight%201",
+				"name" : "SpotLight 1",
+				"label" : "SpotLight 1",
+				"extra" : [
+					{
+						"type" : "studio_node_channels",
+						"version" : 4
+					}
+				]
 			}
 		]
 	}
